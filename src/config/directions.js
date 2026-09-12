@@ -93,14 +93,6 @@ export const directionsConfig = {
 
     competitions: [
       {
-        date: '2022',
-        name: 'CTFTime 2022 年度排名',
-        type: '积分排名',
-        result: '全国第 92 名',
-        highlight: true,
-        note: '世界第 4463 名'
-      },
-      {
         date: '2021',
         name: 'SECCON CTF 2021',
         type: '国际赛',
