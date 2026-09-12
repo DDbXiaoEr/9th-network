@@ -1,0 +1,176 @@
+export const navLinks = [
+  { id: 'home', label: '首页', kind: 'section' },
+  { id: 'about', label: '社团', kind: 'section' },
+  { id: 'services', label: '服务', kind: 'section' },
+  { id: 'directions', label: '方向', kind: 'route', to: '/directions' },
+  { id: 'resources', label: '资源', kind: 'section' },
+  { id: 'join', label: '加入我们', kind: 'section' }
+]
+
+export const heroSlides = [
+  {
+    image: '/images/1.jpg',
+    tag: '西安建筑科技大学',
+    title: '第九网络组',
+    subtitle: '资源共享 · 共学习 · 共提高 · 共进步',
+    desc: '一群热爱计算机科学、刻苦专研的大学生聚集地。'
+  },
+  {
+    image: '/images/2.jpg',
+    tag: '启明于今天',
+    title: '相信这是新的开始',
+    subtitle: '让想法付诸行动',
+    desc: '现在我们是计算机的新主人，未来我们就是 IT 的精英。'
+  },
+  {
+    image: '/images/3.jpg',
+    tag: '技术与热爱',
+    title: '与时代同频',
+    subtitle: '我要拼搏 · 我要进取 · 我要与时俱进',
+    desc: '在系统、网络、开发与安全中，找到属于你的方向。'
+  }
+]
+
+export const stats = [
+  { key: 'directions', value: '6', suffix: '大', label: '技术方向' },
+  { key: 'services', value: '12', suffix: '项', label: '对外服务' },
+  { key: 'members', value: '60', suffix: '+', label: '社团成员' },
+  { key: 'served', value: '800', suffix: '+', label: '累计服务人次' }
+]
+
+export const aboutTabs = [
+  {
+    key: 'intro',
+    label: '社团简介',
+    images: ['/images/t91.jpg'],
+    paragraphs: [
+      '我们是一群热爱计算机科学，有着刻苦专研精神的大学生。我们社团的宗旨是「资源共享，共学习，共提高，共进步」。我们的口号是：现在我们是计算机的新主人，未来我们就是 IT 的精英！',
+      '社团旨在同学中间普及计算机知识、提高计算机技术，提供各种计算机技术辅导，立志于为电脑爱好者提供便利的学习机会和条件，使同学们的计算机水平得到提高。',
+      '社团以增强广大同学的科技意识、激发计算机兴趣、全面提高电脑知识水平和应用能力为目标，重点发展同学在基本操作、网络、图形处理、硬件维护和编程方面的技能，并发掘和发展电脑人才，积极回报服务社会。'
+    ]
+  },
+  {
+    key: 'members',
+    label: '社团成员',
+    images: ['/images/t94.jpg', '/images/t95.jpg'],
+    groups: [
+      { role: '社长', names: ['张浩'] },
+      { role: '副社长', names: [] },
+      { role: '顾问团', names: ['童凯', '贺均威'] },
+      { role: '社团骨干', names: ['李欣', '郭通', '张景涛', '张婵'] },
+      { role: '社团成员', names: ['王兆泉', '杨军', '翟亮', '薛亚鹏', '叶闻晶', '拜晓萌', '等等多位同学'] }
+    ]
+  },
+  {
+    key: 'development',
+    label: '社团发展',
+    images: ['/images/t92.jpg'],
+    items: [
+      '组织会员学习计算机知识，交流并不断提高社员的理论和技术水平。',
+      '不定期组织会员进行各项计算机知识竞赛或其他相关活动。',
+      '适时举办最新技术讲座及咨询活动。',
+      '建立本社团的网站、论坛、QQ 群、微信平台，以便进行资料信息提供及知识交流。',
+      '进行各种电脑实践，帮助同学解决电脑日常使用中的疑难问题、网页制作等。',
+      '组织社员共同学习软件、开发软件，加强分工协作的精神。',
+      '沟通社员与学校和社会相关部门的联系，扩大社员的社交范围和社会影响。'
+    ]
+  }
+]
+
+export const resourceGroups = [
+  {
+    title: '系统教学',
+    icon: '/images/1.png',
+    accent: 'cyan',
+    links: [
+      'Windows 系统安装教程',
+      'Linux CentOS 系统安装教程',
+      'U 盘启动盘制作',
+      '系统激活与驱动安装'
+    ]
+  },
+  {
+    title: '网络安全',
+    icon: '/images/2.png',
+    accent: 'violet',
+    links: ['不安全的 WiFi', '社会工程学', '密码安全指南', '常见木马识别']
+  },
+  {
+    title: '建大热点',
+    icon: '/images/3.png',
+    accent: 'blue',
+    links: ['思科杯虚拟网络架构大赛', '建信歌手大赛开赛', '校园科技文化节', '创新创业大赛']
+  },
+  {
+    title: '社团动态',
+    icon: '/images/4.png',
+    accent: 'amber',
+    links: ['网络技术交流会', '新生见面会', '技术讲座预告', '社团纳新进行时']
+  }
+]
+
+export const resourceArticles = [
+  {
+    id: 'windows-install',
+    category: '系统教学',
+    title: 'Windows 系统安装教程',
+    author: '董威',
+    summary: '通过 PE 工具箱制作启动 U 盘，完成磁盘分区、系统安装、驱动安装与激活的完整流程。',
+    cover: '/images/t91.jpg',
+    tags: ['U盘启动', 'Windows', '教程'],
+    content: [
+      '用 U 盘安装系统总共可分为三个步骤：通过 PE 工具箱制作启动 U 盘；用制作好的启动 U 盘安装系统；驱动的安装以及系统激活。',
+      '一、制作启动 U 盘：下载并安装通用 PE 工具箱，选择要制作的 U 盘盘符，设置相关参数后点击「一键制作 U 盘启动盘」。',
+      '二、用启动 U 盘安装系统：将 U 盘插入电脑，进入 BIOS 设置为从 U 盘启动，进入 WINPE 系统后进行磁盘分区。',
+      '三、系统安装：在 PE 下打开 Windows 安装器，选择镜像文件与安装分区，完成后重启并拔下 U 盘。',
+      '四、驱动安装与激活：借助驱动精灵万能网卡版安装驱动，按需完成系统激活。'
+    ]
+  },
+  {
+    id: 'unsafe-wifi',
+    category: '网络安全',
+    title: '不安全的 WiFi',
+    author: '贺钧威',
+    summary: '从 WPS PIN 码到抓包跑字典，看清公共 WiFi 背后的风险，提高网络安全意识。',
+    cover: '/images/t92.jpg',
+    tags: ['WiFi', '安全', '意识'],
+    content: [
+      '随着路由器的普及，家家户户都有 WiFi，而很多路由器背后都有一个 PIN 码。只要输入和路由器 PIN 码一致的数字，使用 WPS 也能连接上去，这本身就是一把双刃剑。',
+      '黑客不会手动一个一个去尝试，而是利用自动化工具完成扫描与尝试。本文旨在帮助大家理解原理、提高网络安全意识，而不是去蹭邻居家的网。',
+      '防护建议：关闭路由器的 WPS 功能；使用高强度 WiFi 密码；定期更新路由器固件；不在公共 WiFi 下进行支付与登录敏感账号。'
+    ]
+  },
+  {
+    id: 'social-engineering',
+    category: '网络安全',
+    title: '社会工程学简介',
+    author: '贺钧威',
+    summary: '人类思维也可以被看作运行中的软件，社会工程学正是利用人性漏洞的一种攻击方式。',
+    cover: '/images/t93.jpg',
+    tags: ['社会工程学', '诈骗', '防护'],
+    content: [
+      '杯子的容积是有限的，将 10 盎司的液体往 8 盎司的杯子里倒，会发生什么？当然是溢出。如果强行倒入超过其容积的液体，杯子只会在压力作用下破碎。同样的原理也适用于计算机程序。',
+      '软件黑客的目的就是找到能引起程序崩溃的地址，并在该地址插入恶意代码。人类的思维也可以被看作一系列运行的软件，社会工程学黑客的目的是识别出运行的「程序」，并向程序插入代码，从根本上控制思维导向。',
+      '经典案例包括 419 骗局（尼日利亚骗局）以及 FBI 探员长期渗透地下黑市的真实故事。保持警惕、核实身份、拒绝来路不明的利益诱惑，是最好的防护。'
+    ]
+  }
+]
+
+export const joinInfo = {
+  eyebrow: 'Join Us',
+  title: '加入',
+  highlight: '我们',
+  subtitle: '第九网络组每年在统一的迎新活动中招新，无需在线填写信息。',
+  notice: {
+    title: '统一迎新 · 社团处现场报名',
+    desc: '每年开学季，社团会参加学校统一的迎新纳新活动。届时到第九网络组社团摊位现场报名即可，没有线上表单，也不用提前填写个人信息。'
+  },
+  steps: [
+    { title: '关注迎新时间', desc: '留意学校统一迎新活动通知与社团招新安排。' },
+    { title: '来到社团处', desc: '在迎新活动现场找到第九网络组的社团摊位。' },
+    { title: '现场报名', desc: '登记基本信息，选择自己感兴趣的方向。' },
+    { title: '参加见面会', desc: '参加迎新见面会与技术交流，正式开启社团生活。' }
+  ],
+  note: '如有疑问，可在迎新现场向社团工作人员咨询。',
+  cta: { label: '先看看兴趣方向', to: '/directions' }
+}
