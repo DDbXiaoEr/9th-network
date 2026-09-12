@@ -20,7 +20,7 @@
  * ICON 清单
  *   os 系统 | network 网络 | shield 安全 | code 代码 | software 软件
  *   chip 硬件 | book 培训 | terminal 终端 | consult 咨询 | trophy 竞赛
- *   database 数据 | users 团队
+ *   database 数据 | users 团队 | spark 智能 | globe 全球
  */
 
 export const servicesConfig = {
@@ -35,7 +35,7 @@ export const servicesConfig = {
     hintAction: '联系我们定制支持'
   },
 
-  categories: ['系统运维', '网络安全', '开发支持', '技术培训', '硬件服务'],
+  categories: ['系统运维', '网络安全', '开发支持', '技术培训', '硬件服务', 'AI 服务'],
 
   services: [
     {
@@ -148,6 +148,26 @@ export const servicesConfig = {
       desc: '为其他社团活动提供海报处理、直播推流、音响设备与现场技术支持。',
       tags: ['活动支持', '多媒体'],
       status: '活动期'
+    },
+    {
+      id: 'campus-model-api',
+      icon: 'spark',
+      title: '建大校园模型API服务',
+      category: 'AI 服务',
+      desc: '面向校内师生开放的大模型调用接口，提供对话、文本生成、代码辅助等能力，兼容主流 SDK，方便快速接入课程作业、科研与校园应用开发。',
+      tags: ['大模型', 'API', '对话生成'],
+      status: '长期开放',
+      hot: true
+    },
+    {
+      id: 'campus-mcp',
+      icon: 'globe',
+      title: '建大校园公共MCP服务',
+      category: 'AI 服务',
+      desc: '基于 MCP 协议聚合校园公共服务的工具服务端，让 AI 助手可直接查询课表、通知、场馆等信息，为智能体开发与个人自动化提供统一入口。',
+      tags: ['MCP', '工具调用', 'AI Agent'],
+      status: '长期开放',
+      hot: true
     }
   ]
 }
