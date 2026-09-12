@@ -133,6 +133,20 @@ export const directionsConfig = {
         type: '国际赛',
         result: '第 451 名',
         note: 'CTF 725.0000 · Rating 1.687'
+      },
+      {
+        date: '2023',
+        name: 'TSG CTF 2023',
+        type: '国际赛',
+        result: '第 292 名',
+        note: 'CTF 100.0000 · Rating 0.642'
+      },
+      {
+        date: '2023',
+        name: 'DEADFACE CTF 2023',
+        type: '国际赛',
+        result: '第 286 名',
+        note: 'CTF 965.0000 · Rating 3.253'
       }
     ]
   }

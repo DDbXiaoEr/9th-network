@@ -43,7 +43,7 @@ export const servicesConfig = {
       icon: 'os',
       title: '系统安装与重装',
       category: '系统运维',
-      desc: 'Windows / Linux CentOS 系统安装、纯净重装、双系统配置与驱动调试，让每一台电脑焕然一新。',
+      desc: 'Windows / Linux Ubuntu 系统安装、纯净重装、双系统配置与驱动调试，让每一台电脑焕然一新。',
       tags: ['Windows', 'Linux', '驱动'],
       status: '长期开放',
       hot: true
@@ -154,9 +154,9 @@ export const servicesConfig = {
       icon: 'spark',
       title: '建大校园模型API服务',
       category: 'AI 服务',
-      desc: '面向校内师生开放的大模型调用接口，提供对话、文本生成、代码辅助等能力，兼容主流 SDK，方便快速接入课程作业、科研与校园应用开发。',
+      desc: '面向校内开放的大模型调用接口，提供对话、文本生成、代码辅助等能力，兼容主流 SDK，方便快速接入课程作业、科研与校园应用开发。受服务器与算力资源限制，目前暂仅向部分教职工开放，后续将视资源情况逐步扩大范围。',
       tags: ['大模型', 'API', '对话生成'],
-      status: '长期开放',
+      status: '限部分教职工',
       hot: true
     },
     {
@@ -164,9 +164,9 @@ export const servicesConfig = {
       icon: 'globe',
       title: '建大校园公共MCP服务',
       category: 'AI 服务',
-      desc: '基于 MCP 协议聚合校园公共服务的工具服务端，让 AI 助手可直接查询课表、通知、场馆等信息，为智能体开发与个人自动化提供统一入口。',
+      desc: '基于 MCP 协议聚合校园公共服务的工具服务端，为智能体开发与个人自动化提供统一入口。目前正在积极接入各个校园系统，后续 AI 助手可直接查询课表、通知、场馆等信息。',
       tags: ['MCP', '工具调用', 'AI Agent'],
-      status: '长期开放',
+      status: '接入中',
       hot: true
     }
   ]
