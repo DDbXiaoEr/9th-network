@@ -1,5 +1,5 @@
 import { ref } from 'vue'
-import { activitiesConfig } from '../config/activities'
+import { config } from '../config'
 
 export const parseDate = (value) => {
   if (!value) return NaN
@@ -48,7 +48,7 @@ export function useActivities() {
   const source = ref('config')
 
   const load = async () => {
-    const { api, activities: local } = activitiesConfig
+    const { api, activities: local } = config.activities
     if (!api) {
       activities.value = normalize(local)
       source.value = 'config'

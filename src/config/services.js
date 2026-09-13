@@ -172,17 +172,4 @@ export const servicesConfig = {
   ]
 }
 
-const toId = (item, index) =>
-  item.id ||
-  `${item.category || 'service'}-${index}`.replace(/[^\w-]+/g, '-').toLowerCase()
-
-export const services = servicesConfig.services.map((item, index) => ({
-  ...item,
-  id: toId(item, index),
-  tags: item.tags || [],
-  hot: Boolean(item.hot)
-}))
-
-export const serviceCategories = [servicesConfig.section.allLabel, ...servicesConfig.categories]
-
 export default servicesConfig

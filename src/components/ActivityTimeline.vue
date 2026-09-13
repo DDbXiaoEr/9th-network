@@ -1,10 +1,10 @@
 <script setup>
 import { computed } from 'vue'
-import { activitiesConfig } from '../config/activities'
+import { config } from '../config'
 import { parseDate, useActivities } from '../composables/useActivities'
 import BaseIcon from './BaseIcon.vue'
 
-const { section } = activitiesConfig
+const section = config.activities.section
 const { activities, loading, error } = useActivities()
 
 const upcoming = computed(() =>

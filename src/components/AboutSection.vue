@@ -1,9 +1,10 @@
 <script setup>
 import { ref } from 'vue'
-import { aboutTabs } from '../data/site'
+import { config } from '../config'
 import BaseIcon from './BaseIcon.vue'
 
 const active = ref(0)
+const aboutTabs = config.site.aboutTabs
 </script>
 
 <template>

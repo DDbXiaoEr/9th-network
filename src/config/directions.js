@@ -68,8 +68,8 @@ export const directionsConfig = {
       label: '历史最好成绩',
       value: '92',
       unit: '名',
-      title: 'CTFTime 全国排名第 92 名',
-      note: '2022 年度 · 世界第 4463 名'
+      title: 'CTFTime 全国第 92 名（待过，没住下）',
+      note: '第 92 名体验卡已到期，没续费 · 2022 年度 · 世界第 4463 名'
     },
 
     team: {

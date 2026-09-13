@@ -1,9 +1,11 @@
 <script setup>
 import { ref } from 'vue'
-import { resourceArticles, resourceGroups } from '../data/site'
+import { config } from '../config'
 import BaseIcon from './BaseIcon.vue'
 
 const selected = ref(null)
+const resourceArticles = config.site.resourceArticles
+const resourceGroups = config.site.resourceGroups
 
 const openByCategory = (category) => {
   const article = resourceArticles.find((a) => a.category === category)

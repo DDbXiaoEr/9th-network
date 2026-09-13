@@ -1,3 +1,12 @@
+export const brand = {
+  name: '第九网络组',
+  enName: 'THE 9TH NETWORK',
+  fullEnName: 'THE 9TH NETWORK TEAM',
+  slogan: '资源共享 · 共学习 · 共提高 · 共进步',
+  school: '西安建筑科技大学 · 子午社联第九网络组',
+  logo: '/images/t9.gif'
+}
+
 export const navLinks = [
   { id: 'home', label: '首页', kind: 'section' },
   { id: 'about', label: '社团', kind: 'section' },
@@ -5,6 +14,36 @@ export const navLinks = [
   { id: 'directions', label: '方向', kind: 'route', to: '/directions' },
   { id: 'resources', label: '资源', kind: 'section' },
   { id: 'join', label: '加入我们', kind: 'section' }
+]
+
+export const footerLinks = [
+  {
+    title: '社团',
+    items: [
+      { label: '社团简介', to: 'about' },
+      { label: '兴趣方向', to: '/directions' },
+      { label: '社团成员', to: 'about' },
+      { label: '加入我们', to: 'join' }
+    ]
+  },
+  {
+    title: '服务',
+    items: [
+      { label: '系统安装', to: 'services' },
+      { label: '网络诊断', to: 'services' },
+      { label: '网站开发', to: 'services' },
+      { label: '技术培训', to: 'services' }
+    ]
+  },
+  {
+    title: '资源',
+    items: [
+      { label: '系统教学', to: 'resources' },
+      { label: '网络安全', to: 'resources' },
+      { label: '建大热点', to: 'resources' },
+      { label: '社团动态', to: 'resources' }
+    ]
+  }
 ]
 
 export const heroSlides = [

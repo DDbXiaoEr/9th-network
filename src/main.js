@@ -1,6 +1,7 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
+import { loadConfig } from './config'
 import './style.css'
 
 const reveal = {
@@ -24,4 +25,6 @@ const reveal = {
   }
 }
 
-createApp(App).use(router).directive('reveal', reveal).mount('#app')
+loadConfig().finally(() => {
+  createApp(App).use(router).directive('reveal', reveal).mount('#app')
+})

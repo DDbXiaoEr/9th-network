@@ -1,7 +1,7 @@
 <script setup>
-import { nextTick, onMounted, onUnmounted, ref, watch } from 'vue'
+import { computed, nextTick, onMounted, onUnmounted, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { navLinks } from '../data/site'
+import { config } from '../config'
 import BaseIcon from './BaseIcon.vue'
 
 const route = useRoute()
@@ -11,7 +11,10 @@ const scrolled = ref(false)
 const menuOpen = ref(false)
 const active = ref('home')
 
-const sectionLinks = navLinks.filter((link) => link.kind === 'section')
+const brand = config.site.brand
+const navLinks = config.site.navLinks
+
+const sectionLinks = computed(() => navLinks.filter((link) => link.kind === 'section'))
 
 const onScroll = () => {
   scrolled.value = window.scrollY > 24
@@ -21,7 +24,7 @@ const onScroll = () => {
   }
   const fromTop = window.scrollY + 140
   let current = 'home'
-  sectionLinks.forEach((link) => {
+  sectionLinks.value.forEach((link) => {
     const el = document.getElementById(link.id)
     if (el && el.offsetTop <= fromTop) current = link.id
   })
@@ -71,11 +74,11 @@ onUnmounted(() => window.removeEventListener('scroll', onScroll))
     <div class="container nav-inner">
       <button class="brand" @click="go('home')" aria-label="返回首页">
         <span class="brand-mark">
-          <img src="/images/t9.gif" alt="第九网络组" />
+          <img :src="brand.logo" :alt="brand.name" />
         </span>
         <span class="brand-text">
-          <strong>第九网络组</strong>
-          <em>THE 9TH NETWORK</em>
+          <strong>{{ brand.name }}</strong>
+          <em>{{ brand.enName }}</em>
         </span>
       </button>
 

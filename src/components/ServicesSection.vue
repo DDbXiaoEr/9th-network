@@ -1,9 +1,9 @@
 <script setup>
 import { computed, ref } from 'vue'
-import { serviceCategories, services, servicesConfig } from '../config/services'
+import { config, serviceCategories, services } from '../config'
 import BaseIcon from './BaseIcon.vue'
 
-const section = servicesConfig.section
+const section = config.services.section
 const allLabel = section.allLabel
 
 const activeCategory = ref(allLabel)
@@ -11,14 +11,14 @@ const selected = ref(null)
 
 const filtered = computed(() =>
   activeCategory.value === allLabel
-    ? services
-    : services.filter((item) => item.category === activeCategory.value)
+    ? services.value
+    : services.value.filter((item) => item.category === activeCategory.value)
 )
 
 const counts = computed(() => {
-  const map = { [allLabel]: services.length }
-  serviceCategories.slice(1).forEach((cat) => {
-    map[cat] = services.filter((s) => s.category === cat).length
+  const map = { [allLabel]: services.value.length }
+  serviceCategories.value.slice(1).forEach((cat) => {
+    map[cat] = services.value.filter((s) => s.category === cat).length
   })
   return map
 })

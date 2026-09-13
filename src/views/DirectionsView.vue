@@ -1,11 +1,11 @@
 <script setup>
 import { nextTick } from 'vue'
 import { useRouter } from 'vue-router'
-import { directionsConfig } from '../config/directions'
+import { config } from '../config'
 import BaseIcon from '../components/BaseIcon.vue'
 
 const router = useRouter()
-const { section, directions, ctf } = directionsConfig
+const { section, directions, ctf } = config.directions
 
 const goHomeSection = async (id) => {
   await router.push('/')

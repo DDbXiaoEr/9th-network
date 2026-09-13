@@ -1,9 +1,10 @@
 <script setup>
 import { useRouter } from 'vue-router'
-import { joinInfo } from '../data/site'
+import { config } from '../config'
 import BaseIcon from './BaseIcon.vue'
 
 const router = useRouter()
+const joinInfo = config.site.joinInfo
 </script>
 
 <template>

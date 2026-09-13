@@ -1,15 +1,19 @@
 <script setup>
 import { computed, onMounted, onUnmounted, ref } from 'vue'
-import { heroSlides, stats } from '../data/site'
-import { services } from '../config/services'
+import { config, services } from '../config'
 import BaseIcon from './BaseIcon.vue'
 import NetworkCanvas from './NetworkCanvas.vue'
 
 const current = ref(0)
 let timer
 
+const heroSlides = config.site.heroSlides
+const stats = config.site.stats
+
 const heroStats = computed(() =>
-  stats.map((item) => (item.key === 'services' ? { ...item, value: String(services.length) } : item))
+  stats.map((item) =>
+    item.key === 'services' ? { ...item, value: String(services.value.length) } : item
+  )
 )
 
 const go = (id) => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })

@@ -1,0 +1,145 @@
+{
+  "section": {
+    "eyebrow": "Club Services",
+    "title": "社团",
+    "highlight": "公共服务",
+    "subtitle": "第九网络组面向全校师生提供技术类公共服务。以下项目长期开放，点击卡片可查看详情并申请。",
+    "allLabel": "全部",
+    "hint": "没有找到需要的服务？",
+    "hintAction": "联系我们定制支持"
+  },
+  "categories": ["系统运维", "网络安全", "开发支持", "技术培训", "硬件服务", "AI 服务"],
+  "services": [
+    {
+      "id": "os-install",
+      "icon": "os",
+      "title": "系统安装与重装",
+      "category": "系统运维",
+      "desc": "Windows / Linux Ubuntu 系统安装、纯净重装、双系统配置与驱动调试，让每一台电脑焕然一新。",
+      "tags": ["Windows", "Linux", "驱动"],
+      "status": "长期开放",
+      "hot": true
+    },
+    {
+      "id": "network-diag",
+      "icon": "network",
+      "title": "网络故障诊断",
+      "category": "系统运维",
+      "desc": "校园网、宿舍网络连接异常排查，路由器配置优化，WiFi 信号与网速问题定位。",
+      "tags": ["路由配置", "故障排查"],
+      "status": "长期开放"
+    },
+    {
+      "id": "security",
+      "icon": "shield",
+      "title": "网络安全体检",
+      "category": "网络安全",
+      "desc": "账号安全、WiFi 安全、木马查杀与隐私防护建议，帮助你建立基本的网络安全意识。",
+      "tags": ["安全防护", "查杀"],
+      "status": "需预约",
+      "hot": true
+    },
+    {
+      "id": "website",
+      "icon": "code",
+      "title": "网站与小程序开发",
+      "category": "开发支持",
+      "desc": "为校内社团、学生组织提供官网、活动报名页、小程序等轻量级开发与技术支持。",
+      "tags": ["Vue", "前端", "小程序"],
+      "status": "项目制",
+      "hot": true
+    },
+    {
+      "id": "software",
+      "icon": "software",
+      "title": "软件安装与指导",
+      "category": "系统运维",
+      "desc": "办公、设计、编程等常用软件的正版获取与安装指导，解决环境配置与兼容性问题。",
+      "tags": ["办公", "开发环境"],
+      "status": "长期开放"
+    },
+    {
+      "id": "hardware",
+      "icon": "chip",
+      "title": "硬件维护与升级",
+      "category": "硬件服务",
+      "desc": "笔记本清灰、加装内存 / 固态硬盘、性能检测与升级建议，延长爱机使用寿命。",
+      "tags": ["清灰", "升级", "检测"],
+      "status": "需预约"
+    },
+    {
+      "id": "training",
+      "icon": "book",
+      "title": "技术培训与讲座",
+      "category": "技术培训",
+      "desc": "定期举办计算机基础、网络技术、编程入门等公开课与分享会，零基础也能参与。",
+      "tags": ["公开课", "分享会"],
+      "status": "周期举办"
+    },
+    {
+      "id": "coding",
+      "icon": "terminal",
+      "title": "编程入门陪跑",
+      "category": "技术培训",
+      "desc": "C / Python / 前端开发入门辅导，从环境搭建到第一个项目，学长学姐带你上手。",
+      "tags": ["C", "Python", "前端"],
+      "status": "学期制"
+    },
+    {
+      "id": "consult",
+      "icon": "consult",
+      "title": "数码选购咨询",
+      "category": "硬件服务",
+      "desc": "装机配置单、笔记本选购、外设搭配建议，按预算与专业需求给出中立推荐。",
+      "tags": ["装机", "选购"],
+      "status": "长期开放"
+    },
+    {
+      "id": "competition",
+      "icon": "trophy",
+      "title": "学科竞赛组队",
+      "category": "开发支持",
+      "desc": "为程序设计、网络安全、虚拟网络架构等竞赛提供组队、培训与指导支持。",
+      "tags": ["竞赛", "组队"],
+      "status": "赛期开放"
+    },
+    {
+      "id": "data-recovery",
+      "icon": "database",
+      "title": "数据备份与恢复",
+      "category": "系统运维",
+      "desc": "重要文件备份方案建议、误删数据恢复尝试，帮你守住珍贵资料。",
+      "tags": ["备份", "恢复"],
+      "status": "需预约"
+    },
+    {
+      "id": "social",
+      "icon": "users",
+      "title": "社团技术支持",
+      "category": "开发支持",
+      "desc": "为其他社团活动提供海报处理、直播推流、音响设备与现场技术支持。",
+      "tags": ["活动支持", "多媒体"],
+      "status": "活动期"
+    },
+    {
+      "id": "campus-model-api",
+      "icon": "spark",
+      "title": "建大校园模型API服务",
+      "category": "AI 服务",
+      "desc": "面向校内开放的大模型调用接口，提供对话、文本生成、代码辅助等能力，兼容主流 SDK，方便快速接入课程作业、科研与校园应用开发。受服务器与算力资源限制，目前暂仅向部分教职工开放，后续将视资源情况逐步扩大范围。",
+      "tags": ["大模型", "API", "对话生成"],
+      "status": "限部分教职工",
+      "hot": true
+    },
+    {
+      "id": "campus-mcp",
+      "icon": "globe",
+      "title": "建大校园公共MCP服务",
+      "category": "AI 服务",
+      "desc": "基于 MCP 协议聚合校园公共服务的工具服务端，为智能体开发与个人自动化提供统一入口。目前正在积极接入各个校园系统，后续 AI 助手可直接查询课表、通知、场馆等信息。",
+      "tags": ["MCP", "工具调用", "AI Agent"],
+      "status": "接入中",
+      "hot": true
+    }
+  ]
+}

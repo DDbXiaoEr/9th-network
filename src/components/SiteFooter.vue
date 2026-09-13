@@ -1,39 +1,13 @@
 <script setup>
 import { nextTick } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import { config } from '../config'
 
 const route = useRoute()
 const router = useRouter()
 
-const links = [
-  {
-    title: '社团',
-    items: [
-      { label: '社团简介', to: 'about' },
-      { label: '兴趣方向', to: '/directions' },
-      { label: '社团成员', to: 'about' },
-      { label: '加入我们', to: 'join' }
-    ]
-  },
-  {
-    title: '服务',
-    items: [
-      { label: '系统安装', to: 'services' },
-      { label: '网络诊断', to: 'services' },
-      { label: '网站开发', to: 'services' },
-      { label: '技术培训', to: 'services' }
-    ]
-  },
-  {
-    title: '资源',
-    items: [
-      { label: '系统教学', to: 'resources' },
-      { label: '网络安全', to: 'resources' },
-      { label: '建大热点', to: 'resources' },
-      { label: '社团动态', to: 'resources' }
-    ]
-  }
-]
+const brand = config.site.brand
+const links = config.site.footerLinks
 
 const go = async (to) => {
   if (to.startsWith('/')) {
@@ -55,14 +29,14 @@ const go = async (to) => {
     <div class="container footer-inner">
       <div class="brand-col">
         <div class="brand">
-          <img src="/images/t9.gif" alt="第九网络组" />
+          <img :src="brand.logo" :alt="brand.name" />
           <div>
-            <strong>第九网络组</strong>
-            <em>THE 9TH NETWORK TEAM</em>
+            <strong>{{ brand.name }}</strong>
+            <em>{{ brand.fullEnName }}</em>
           </div>
         </div>
-        <p>资源共享 · 共学习 · 共提高 · 共进步</p>
-        <p class="school">西安建筑科技大学 · 子午社联第九网络组</p>
+        <p>{{ brand.slogan }}</p>
+        <p class="school">{{ brand.school }}</p>
       </div>
 
       <div class="link-cols">
@@ -80,7 +54,7 @@ const go = async (to) => {
     </div>
 
     <div class="container footer-bottom">
-      <p>Copyright &copy; {{ new Date().getFullYear() }} 第九网络组 · The 9th Network Team</p>
+      <p>Copyright &copy; {{ new Date().getFullYear() }} {{ brand.name }} · {{ brand.fullEnName }}</p>
       <p class="mono">Designed &amp; Built with Vue 3</p>
     </div>
   </footer>
