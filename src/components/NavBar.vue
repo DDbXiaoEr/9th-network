@@ -117,7 +117,7 @@ onUnmounted(() => window.removeEventListener('scroll', onScroll))
 }
 
 .nav.scrolled {
-  background: rgba(5, 7, 15, 0.82);
+  background: rgba(18, 26, 45, 0.82);
   backdrop-filter: blur(16px);
   border-bottom-color: var(--border);
 }
@@ -259,7 +259,7 @@ onUnmounted(() => window.removeEventListener('scroll', onScroll))
     align-items: stretch;
     padding: 16px;
     gap: 6px;
-    background: rgba(8, 12, 24, 0.96);
+    background: rgba(20, 29, 50, 0.96);
     border: 1px solid var(--border);
     border-radius: var(--radius);
     backdrop-filter: blur(18px);

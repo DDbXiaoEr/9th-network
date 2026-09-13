@@ -131,11 +131,11 @@ onUnmounted(() => clearInterval(timer))
   opacity: 0;
   transform: scale(1.06);
   transition: opacity 1.2s ease, transform 7s ease;
-  filter: saturate(0.95) brightness(0.98);
+  filter: saturate(1) brightness(1.12);
 }
 
 .hero-bg img.active {
-  opacity: 0.62;
+  opacity: 0.82;
   transform: scale(1);
 }
 
@@ -145,15 +145,15 @@ onUnmounted(() => clearInterval(timer))
   background:
     linear-gradient(
       90deg,
-      rgba(5, 7, 15, 0.95) 0%,
-      rgba(5, 7, 15, 0.74) 42%,
-      rgba(5, 7, 15, 0.28) 100%
+      rgba(10, 16, 30, 0.82) 0%,
+      rgba(10, 16, 30, 0.48) 42%,
+      rgba(10, 16, 30, 0.1) 100%
     ),
     linear-gradient(
       180deg,
-      rgba(5, 7, 15, 0.42) 0%,
-      rgba(5, 7, 15, 0.18) 38%,
-      rgba(5, 7, 15, 0.85) 82%,
+      rgba(10, 16, 30, 0.28) 0%,
+      rgba(10, 16, 30, 0.08) 38%,
+      rgba(10, 16, 30, 0.7) 82%,
       var(--bg) 100%
     );
 }

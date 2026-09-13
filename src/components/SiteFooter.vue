@@ -65,7 +65,7 @@ const go = async (to) => {
   position: relative;
   margin-top: 40px;
   border-top: 1px solid var(--border);
-  background: linear-gradient(180deg, rgba(10, 15, 30, 0.4), rgba(5, 7, 15, 0.9));
+  background: linear-gradient(180deg, rgba(26, 36, 64, 0.35), rgba(18, 26, 45, 0.88));
 }
 
 .footer-inner {

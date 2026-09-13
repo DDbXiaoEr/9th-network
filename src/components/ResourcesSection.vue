@@ -186,7 +186,7 @@ const openByTitle = (groupTitle, link) => {
   display: grid;
   place-items: center;
   padding: 24px;
-  background: rgba(3, 5, 12, 0.78);
+  background: rgba(10, 16, 30, 0.72);
   backdrop-filter: blur(8px);
 }
 

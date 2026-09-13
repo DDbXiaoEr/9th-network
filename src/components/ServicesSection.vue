@@ -319,7 +319,7 @@ const goJoin = () => {
   display: grid;
   place-items: center;
   padding: 20px;
-  background: rgba(3, 5, 12, 0.72);
+  background: rgba(10, 16, 30, 0.72);
   backdrop-filter: blur(6px);
 }
 
