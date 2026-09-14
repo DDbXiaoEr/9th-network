@@ -64,6 +64,27 @@ func TestTextListAdd(t *testing.T) {
 	}
 }
 
+func TestChoiceRowCycle(t *testing.T) {
+	value := "modal"
+	row := choiceRow("方式", &value, opt("modal", "弹窗提示"), opt("link", "链接跳转"))
+	if got := row.choiceLabel(); got != "弹窗提示" {
+		t.Fatalf("期望展示「弹窗提示」，实际 %q", got)
+	}
+	row.nextChoice()
+	if value != "link" {
+		t.Fatalf("切换后期望 link，实际 %q", value)
+	}
+	row.nextChoice()
+	if value != "modal" {
+		t.Fatalf("循环切换后期望 modal，实际 %q", value)
+	}
+	value = "unknown"
+	row.nextChoice()
+	if value != "modal" {
+		t.Fatalf("未知值切换后期望回到首项 modal，实际 %q", value)
+	}
+}
+
 func TestRunWithRealConfig(t *testing.T) {
 	srcDir := "../../../../public/config"
 	dst := t.TempDir()

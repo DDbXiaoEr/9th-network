@@ -42,5 +42,34 @@ func serviceForm(ctx *Ctx, v *model.Service) screen {
 		}),
 		rowText("状态", &v.Status),
 		boolRow("热门", &v.Hot),
+		openRow("访问方式", func() string { return accessSummary(v.Access) }, func() screen {
+			if v.Access == nil {
+				v.Access = &model.ServiceAccess{Type: "modal"}
+			}
+			return serviceAccessForm(ctx, v.Access)
+		}),
+	})
+}
+
+func accessSummary(a *model.ServiceAccess) string {
+	if a == nil || a.Type == "" {
+		return "弹窗提示"
+	}
+	if a.Type == "link" {
+		if a.URL == "" {
+			return "链接跳转（未填链接）"
+		}
+		return "链接跳转 " + a.URL
+	}
+	return "弹窗提示"
+}
+
+func serviceAccessForm(ctx *Ctx, v *model.ServiceAccess) screen {
+	return newFormScreen(ctx, "访问方式", []formRow{
+		choiceRow("方式", &v.Type, opt("modal", "弹窗提示"), opt("link", "链接跳转")),
+		rowText("按钮文案", &v.Label),
+		rowText("链接地址", &v.URL),
+		rowText("弹窗标题", &v.Title),
+		rowLong("弹窗内容", &v.Note),
 	})
 }

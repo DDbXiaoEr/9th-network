@@ -8,6 +8,21 @@ const allLabel = section.allLabel
 
 const activeCategory = ref(allLabel)
 const selected = ref(null)
+const prompt = ref(null)
+
+const accessOf = (item) => {
+  const access = item?.access || {}
+  const type = access.type === 'link' && access.url ? 'link' : 'modal'
+  return {
+    type,
+    url: access.url || '',
+    label: access.label || '申请该服务',
+    title: access.title || '申请提示',
+    note: access.note || '请联系社团管理员了解该服务的申请方式。'
+  }
+}
+
+const selectedAccess = computed(() => (selected.value ? accessOf(selected.value) : null))
 
 const filtered = computed(() =>
   activeCategory.value === allLabel
@@ -23,7 +38,26 @@ const counts = computed(() => {
   return map
 })
 
+const closeSelected = () => {
+  selected.value = null
+}
+
+const applyService = () => {
+  if (!selected.value) return
+  const access = accessOf(selected.value)
+  if (access.type === 'link') {
+    window.open(access.url, '_blank', 'noopener,noreferrer')
+    return
+  }
+  prompt.value = access
+}
+
+const closePrompt = () => {
+  prompt.value = null
+}
+
 const goJoin = () => {
+  prompt.value = null
   selected.value = null
   document.getElementById('join')?.scrollIntoView({ behavior: 'smooth' })
 }
@@ -88,9 +122,9 @@ const goJoin = () => {
     </div>
 
     <transition name="fade">
-      <div v-if="selected" class="modal-mask" @click.self="selected = null">
+      <div v-if="selected" class="modal-mask" @click.self="closeSelected">
         <div class="modal glass" v-reveal>
-          <button class="close" @click="selected = null" aria-label="关闭">
+          <button class="close" @click="closeSelected" aria-label="关闭">
             <BaseIcon name="close" :size="20" />
           </button>
           <div class="modal-head">
@@ -113,10 +147,23 @@ const goJoin = () => {
               <span class="meta-value">{{ selected.tags.join(' · ') }}</span>
             </div>
           </div>
-          <button class="modal-btn" @click="goJoin">
-            申请该服务
-            <BaseIcon name="arrow-right" :size="16" />
+          <button class="modal-btn" @click="applyService">
+            {{ selectedAccess.label }}
+            <BaseIcon :name="selectedAccess.type === 'link' ? 'external' : 'arrow-right'" :size="16" />
           </button>
+        </div>
+      </div>
+    </transition>
+
+    <transition name="fade">
+      <div v-if="prompt" class="modal-mask prompt-mask" @click.self="closePrompt">
+        <div class="prompt glass" v-reveal>
+          <button class="close" @click="closePrompt" aria-label="关闭">
+            <BaseIcon name="close" :size="20" />
+          </button>
+          <h3 class="prompt-title">{{ prompt.title }}</h3>
+          <p class="prompt-note">{{ prompt.note }}</p>
+          <button class="modal-btn" @click="closePrompt">知道了</button>
         </div>
       </div>
     </transition>
@@ -421,6 +468,33 @@ const goJoin = () => {
 .modal-btn:hover {
   transform: translateY(-2px);
   box-shadow: 0 14px 34px rgba(34, 211, 238, 0.4);
+}
+
+.prompt-mask {
+  z-index: 300;
+  background: rgba(6, 10, 20, 0.78);
+}
+
+.prompt {
+  position: relative;
+  width: min(440px, 100%);
+  padding: 34px 30px 28px;
+  text-align: center;
+  box-shadow: 0 40px 100px rgba(0, 0, 0, 0.6);
+}
+
+.prompt-title {
+  font-size: 20px;
+  color: var(--text);
+  margin-bottom: 14px;
+}
+
+.prompt-note {
+  color: var(--text-dim);
+  font-size: 14.5px;
+  line-height: 1.8;
+  margin-bottom: 24px;
+  white-space: pre-line;
 }
 
 .fade-enter-active,

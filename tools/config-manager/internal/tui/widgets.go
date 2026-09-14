@@ -234,7 +234,18 @@ const (
 	rowString rowKind = iota
 	rowBool
 	rowOpen
+	rowChoice
 )
+
+// choiceOption 是 rowChoice 的可选项：value 写入配置，label 用于界面展示。
+type choiceOption struct {
+	value string
+	label string
+}
+
+func opt(value, label string) choiceOption {
+	return choiceOption{value: value, label: label}
+}
 
 type formRow struct {
 	label   string
@@ -243,6 +254,7 @@ type formRow struct {
 	bptr    *bool
 	summary func() string
 	open    func() screen
+	options []choiceOption
 	long    bool
 }
 
@@ -258,8 +270,40 @@ func boolRow(label string, p *bool) formRow {
 	return formRow{label: label, kind: rowBool, bptr: p}
 }
 
+func choiceRow(label string, p *string, options ...choiceOption) formRow {
+	return formRow{label: label, kind: rowChoice, ptr: p, options: options}
+}
+
 func openRow(label string, summary func() string, open func() screen) formRow {
 	return formRow{label: label, kind: rowOpen, summary: summary, open: open}
+}
+
+// choiceLabel 返回当前值对应的展示文案；值不在选项中时原样返回。
+func (r formRow) choiceLabel() string {
+	if *r.ptr == "" {
+		return ""
+	}
+	for _, o := range r.options {
+		if o.value == *r.ptr {
+			return o.label
+		}
+	}
+	return *r.ptr
+}
+
+// nextChoice 在当前选项之间循环切换；当前值不在选项中时从第一项开始。
+func (r formRow) nextChoice() {
+	if len(r.options) == 0 {
+		return
+	}
+	idx := -1
+	for i, o := range r.options {
+		if o.value == *r.ptr {
+			idx = i
+			break
+		}
+	}
+	*r.ptr = r.options[(idx+1)%len(r.options)].value
 }
 
 type formScreen struct {
@@ -298,6 +342,11 @@ func (f *formScreen) value(i int) string {
 			return badgeStyle.Render("[x] 是")
 		}
 		return dimStyle.Render("[ ] 否")
+	case rowChoice:
+		if label := r.choiceLabel(); label != "" {
+			return badgeStyle.Render(label)
+		}
+		return dimStyle.Render("（未设置）")
 	case rowOpen:
 		if r.summary != nil {
 			return dimStyle.Render(r.summary())
@@ -342,6 +391,8 @@ func (f *formScreen) Update(msg tea.Msg) (screen, tea.Cmd) {
 		switch r.kind {
 		case rowBool:
 			*r.bptr = !*r.bptr
+		case rowChoice:
+			r.nextChoice()
 		case rowString:
 			if r.long {
 				return f, push(newTextScreen(f.ctx, f.heading+" · "+r.label, r.ptr))

@@ -16,6 +16,12 @@
  *       tags     标签数组
  *       status   服务状态，如「长期开放」「需预约」
  *       hot      是否标记为热门，可选，默认 false
+ *       access   点击「申请该服务」后的访问方式，可选，默认弹窗提示：
+ *                  type   modal 弹窗提示（默认） | link 链接跳转
+ *                  label  申请按钮文案，可选，默认「申请该服务」
+ *                  url    type=link 时的跳转地址（新标签页打开）
+ *                  title  type=modal 时的弹窗标题，可选，默认「申请提示」
+ *                  note   type=modal 时的弹窗内容，可选
  *
  * ICON 清单
  *   os 系统 | network 网络 | shield 安全 | code 代码 | software 软件
@@ -157,7 +163,12 @@ export const servicesConfig = {
       desc: '面向校内开放的大模型调用接口，提供对话、文本生成、代码辅助等能力，兼容主流 SDK，方便快速接入课程作业、科研与校园应用开发。受服务器与算力资源限制，目前暂仅向部分教职工开放，后续将视资源情况逐步扩大范围。',
       tags: ['大模型', 'API', '对话生成'],
       status: '限部分教职工',
-      hot: true
+      hot: true,
+      access: {
+        type: 'modal',
+        title: '申请方式',
+        note: '该服务受服务器与算力资源限制，目前暂仅向部分教职工开放。如需申请，请联系社团管理员。'
+      }
     },
     {
       id: 'campus-mcp',
@@ -167,7 +178,12 @@ export const servicesConfig = {
       desc: '基于 MCP 协议聚合校园公共服务的工具服务端，为智能体开发与个人自动化提供统一入口。目前正在积极接入各个校园系统，后续 AI 助手可直接查询课表、通知、场馆等信息。',
       tags: ['MCP', '工具调用', 'AI Agent'],
       status: '接入中',
-      hot: true
+      hot: true,
+      access: {
+        type: 'modal',
+        title: '申请方式',
+        note: '建大校园公共 MCP 服务仍在接入各校园系统，暂未对外开放。开放后会在此处公布访问链接。'
+      }
     }
   ]
 }

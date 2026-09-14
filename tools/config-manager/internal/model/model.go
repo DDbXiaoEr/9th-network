@@ -130,14 +130,26 @@ type ServicesSection struct {
 }
 
 type Service struct {
-	ID       string   `json:"id"`
-	Icon     string   `json:"icon"`
-	Title    string   `json:"title"`
-	Category string   `json:"category"`
-	Desc     string   `json:"desc"`
-	Tags     []string `json:"tags"`
-	Status   string   `json:"status"`
-	Hot      bool     `json:"hot,omitempty"`
+	ID       string         `json:"id"`
+	Icon     string         `json:"icon"`
+	Title    string         `json:"title"`
+	Category string         `json:"category"`
+	Desc     string         `json:"desc"`
+	Tags     []string       `json:"tags"`
+	Status   string         `json:"status"`
+	Hot      bool           `json:"hot,omitempty"`
+	Access   *ServiceAccess `json:"access,omitempty"`
+}
+
+// ServiceAccess 描述点击「申请该服务」后的访问方式：
+//   - modal 弹窗提示：弹出提示框显示 Note
+//   - link  链接跳转：在新标签页打开 URL
+type ServiceAccess struct {
+	Type  string `json:"type,omitempty"`
+	URL   string `json:"url,omitempty"`
+	Label string `json:"label,omitempty"`
+	Title string `json:"title,omitempty"`
+	Note  string `json:"note,omitempty"`
 }
 
 // Activities 对应 public/config/activities.json
