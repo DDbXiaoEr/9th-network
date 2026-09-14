@@ -5,7 +5,7 @@ BIN     ?= $(TOOLDIR)/bin/config-manager
 ARGS    ?=
 
 .DEFAULT_GOAL := help
-.PHONY: all install dev preview web-build build tool-build run test vet fmt fmt-check tidy clean help
+.PHONY: all install dev preview web-build build tool-build tool-build-linux run test vet fmt fmt-check tidy clean help
 
 all: build
 
@@ -27,6 +27,9 @@ web-build: ## 构建前端到 dist/
 
 tool-build: ## 编译配置管理 TUI 到 tools/config-manager/bin/
 	$(GO) -C $(TOOLDIR) build -o bin/config-manager .
+
+tool-build-linux: ## 交叉编译配置管理 TUI 到 linux/amd64
+	GOOS=linux GOARCH=amd64 $(GO) -C $(TOOLDIR) build -o bin/config-manager-linux-amd64 .
 
 run: tool-build ## 运行 TUI，可传参数：make run ARGS="-web dist"
 	$(BIN) $(ARGS)
