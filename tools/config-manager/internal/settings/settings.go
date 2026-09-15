@@ -12,11 +12,11 @@ type Settings struct {
 }
 
 func filePath() (string, error) {
-	dir, err := os.UserConfigDir()
+	home, err := os.UserHomeDir()
 	if err != nil {
 		return "", err
 	}
-	return filepath.Join(dir, "9thnet-config-manager", "settings.json"), nil
+	return filepath.Join(home, ".config", "9thnet-config-manager", "settings.json"), nil
 }
 
 // Load 读取设置；文件不存在或损坏时返回零值，不报错。

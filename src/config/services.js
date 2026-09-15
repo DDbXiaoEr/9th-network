@@ -184,6 +184,20 @@ export const servicesConfig = {
         title: '申请方式',
         note: '建大校园公共 MCP 服务仍在接入各校园系统，暂未对外开放。开放后会在此处公布访问链接。'
       }
+    },
+    {
+      id: 'carsi-idp',
+      icon: 'shield',
+      title: '建大CARSI IDP身份漫游认证服务',
+      category: '系统运维',
+      desc: 'CARSI是中国教育科研计算机网统一认证与资源共享基础设施（CERNET Authentication and Resource Sharing Infrastructure），2008年12月由北京大学计算中心发起建设，在国内高校已经普遍建设完成的校园网统一用户管理和身份认证系统基础上，面向中国高校和科研机构提供跨域身份认证和资源共享服务。',
+      tags: ['CARSI', '身份认证', '跨域认证'],
+      status: '长期开放',
+      hot: true,
+      access: {
+        type: 'link',
+        url: 'https://idp.xauat.edu.cn/'
+      }
     }
   ]
 }

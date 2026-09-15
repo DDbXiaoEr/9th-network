@@ -8,6 +8,8 @@ const router = useRouter()
 
 const brand = config.site.brand
 const links = config.site.footerLinks
+const friendLinks = config.site.friendLinks || []
+const icp = config.site.icp || ''
 
 const go = async (to) => {
   if (to.startsWith('/')) {
@@ -21,6 +23,10 @@ const go = async (to) => {
   } else {
     document.getElementById(to)?.scrollIntoView({ behavior: 'smooth' })
   }
+}
+
+const openLink = (url) => {
+  window.open(url, '_blank', 'noopener,noreferrer')
 }
 </script>
 
@@ -53,9 +59,24 @@ const go = async (to) => {
       </div>
     </div>
 
+    <div v-if="friendLinks.length" class="container friend-links-section">
+      <div class="friend-links-inner">
+        <h4>友情链接</h4>
+        <div class="friend-links-list">
+          <button
+            v-for="link in friendLinks"
+            :key="link.label"
+            @click="openLink(link.url)"
+          >
+            {{ link.label }}
+          </button>
+        </div>
+      </div>
+    </div>
+
     <div class="container footer-bottom">
       <p>Copyright &copy; {{ new Date().getFullYear() }} {{ brand.name }} · {{ brand.fullEnName }}</p>
-      <p class="mono">Designed &amp; Built with Vue 3</p>
+      <a v-if="icp" href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer" class="icp">{{ icp }}</a>
     </div>
   </footer>
 </template>
@@ -152,6 +173,45 @@ const go = async (to) => {
   transform: translateX(3px);
 }
 
+.friend-links-section {
+  border-top: 1px solid var(--border);
+  padding: 28px 0;
+}
+
+.friend-links-inner {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.friend-links-inner h4 {
+  font-size: 13px;
+  letter-spacing: 0.12em;
+  font-family: var(--mono);
+  color: var(--cyan);
+  white-space: nowrap;
+}
+
+.friend-links-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 20px;
+}
+
+.friend-links-list button {
+  background: none;
+  border: 0;
+  color: var(--text-dim);
+  font-size: 13px;
+  padding: 0;
+  transition: color 0.2s ease;
+}
+
+.friend-links-list button:hover {
+  color: var(--cyan-soft);
+}
+
 .footer-bottom {
   display: flex;
   align-items: center;
@@ -161,6 +221,19 @@ const go = async (to) => {
   border-top: 1px solid var(--border);
   color: var(--text-mute);
   font-size: 13px;
+}
+
+.icp {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.05em;
+  color: var(--text-mute);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.icp:hover {
+  color: var(--cyan-soft);
 }
 
 .mono {
@@ -179,11 +252,18 @@ const go = async (to) => {
     flex-direction: column;
     align-items: flex-start;
   }
+  .friend-links-inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }
 
 @media (max-width: 480px) {
   .link-cols {
     grid-template-columns: 1fr 1fr;
+  }
+  .footer-bottom {
+    gap: 8px;
   }
 }
 </style>

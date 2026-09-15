@@ -213,3 +213,10 @@ export const joinInfo = {
   note: '如有疑问，可在迎新现场向社团工作人员咨询。',
   cta: { label: '先看看兴趣方向', to: '/directions' }
 }
+
+export const friendLinks = [
+  { label: '西安建筑科技大学', url: 'https://www.xauat.edu.cn/' },
+  { label: '中国教育和科研计算机网', url: 'https://www.cernet.edu.cn/' }
+]
+
+export const icp = '陕ICP备XXXXXXXX号'

@@ -21,6 +21,12 @@ func siteRoot(ctx *Ctx, s *model.Site) screen {
 				func(_ int, v *model.FooterGroup) (string, string) { return v.Title, itemCount(len(v.Items)) },
 				footerGroupForm, func() model.FooterGroup { return model.FooterGroup{} })
 		}),
+		openRow("友情链接", func() string { return itemCount(len(s.FriendLinks)) }, func() screen {
+			return objectList(ctx, "友情链接", "", &s.FriendLinks,
+				func(_ int, v *model.FriendLink) (string, string) { return v.Label, v.URL },
+				friendLinkForm, func() model.FriendLink { return model.FriendLink{} })
+		}),
+		rowText("备案号", &s.ICP),
 		openRow("首屏轮播", func() string { return itemCount(len(s.HeroSlides)) }, func() screen {
 			return objectList(ctx, "首屏轮播", "", &s.HeroSlides,
 				func(_ int, v *model.HeroSlide) (string, string) { return v.Title, v.Tag },
@@ -87,6 +93,13 @@ func footerItemForm(ctx *Ctx, v *model.FooterItem) screen {
 	return newFormScreen(ctx, "页脚链接", []formRow{
 		rowText("名称", &v.Label),
 		rowText("目标 to", &v.To),
+	})
+}
+
+func friendLinkForm(ctx *Ctx, v *model.FriendLink) screen {
+	return newFormScreen(ctx, "友情链接", []formRow{
+		rowText("名称", &v.Label),
+		rowText("链接 URL", &v.URL),
 	})
 }
 

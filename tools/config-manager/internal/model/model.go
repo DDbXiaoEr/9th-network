@@ -5,6 +5,8 @@ type Site struct {
 	Brand            Brand             `json:"brand"`
 	NavLinks         []NavLink         `json:"navLinks"`
 	FooterLinks      []FooterGroup     `json:"footerLinks"`
+	FriendLinks      []FriendLink      `json:"friendLinks,omitempty"`
+	ICP              string            `json:"icp,omitempty"`
 	HeroSlides       []HeroSlide       `json:"heroSlides"`
 	Stats            []Stat            `json:"stats"`
 	AboutTabs        []AboutTab        `json:"aboutTabs"`
@@ -37,6 +39,11 @@ type FooterGroup struct {
 type FooterItem struct {
 	Label string `json:"label"`
 	To    string `json:"to"`
+}
+
+type FriendLink struct {
+	Label string `json:"label"`
+	URL   string `json:"url"`
 }
 
 type HeroSlide struct {
