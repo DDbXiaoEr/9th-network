@@ -7,6 +7,13 @@ import NetworkCanvas from './NetworkCanvas.vue'
 const current = ref(0)
 let timer
 
+// 终端状态
+const terminalVisible = ref(true)
+const isDragging = ref(false)
+const dragOffset = ref({ x: 0, y: 0 })
+const position = ref({ x: 0, y: 0 })
+const isInitialPosition = ref(true)
+
 const heroSlides = config.site.heroSlides
 const stats = config.site.stats
 
@@ -22,10 +29,61 @@ const next = () => {
   current.value = (current.value + 1) % heroSlides.length
 }
 
+// 拖动开始
+const onDragStart = (e) => {
+  isDragging.value = true
+  const terminal = document.querySelector('.hero-terminal')
+  if (!terminal) return
+  
+  // 第一次拖动时，获取当前实际位置
+  if (isInitialPosition.value) {
+    const rect = terminal.getBoundingClientRect()
+    position.value = { x: rect.left, y: rect.top }
+    isInitialPosition.value = false
+  }
+  
+  dragOffset.value = {
+    x: e.clientX - position.value.x,
+    y: e.clientY - position.value.y
+  }
+}
+
+// 拖动中 - 限制在窗口范围内
+const onDragMove = (e) => {
+  if (!isDragging.value) return
+  const terminal = document.querySelector('.hero-terminal')
+  if (!terminal) return
+
+  const rect = terminal.getBoundingClientRect()
+  const maxX = window.innerWidth - rect.width
+  const maxY = window.innerHeight - rect.height
+
+  position.value = {
+    x: Math.max(0, Math.min(e.clientX - dragOffset.value.x, maxX)),
+    y: Math.max(0, Math.min(e.clientY - dragOffset.value.y, maxY))
+  }
+}
+
+// 拖动结束
+const onDragEnd = () => {
+  isDragging.value = false
+}
+
+// 关闭终端
+const closeTerminal = () => {
+  terminalVisible.value = false
+}
+
 onMounted(() => {
   timer = setInterval(next, 6000)
+  document.addEventListener('mousemove', onDragMove)
+  document.addEventListener('mouseup', onDragEnd)
 })
-onUnmounted(() => clearInterval(timer))
+onUnmounted(() => {
+  clearInterval(timer)
+  document.removeEventListener('mousemove', onDragMove)
+  document.removeEventListener('mouseup', onDragEnd)
+})
 </script>
 
 <template>
@@ -74,9 +132,14 @@ onUnmounted(() => clearInterval(timer))
         </div>
       </div>
 
-      <div class="hero-terminal glass">
-        <div class="terminal-bar">
-          <span class="dot red" />
+      <div
+        v-if="terminalVisible"
+        class="hero-terminal glass"
+        :class="{ dragging: isDragging, 'has-moved': !isInitialPosition }"
+        :style="isInitialPosition ? {} : { left: position.x + 'px', top: position.y + 'px' }"
+      >
+        <div class="terminal-bar" @mousedown="onDragStart">
+          <span class="dot red" @click.stop="closeTerminal" />
           <span class="dot amber" />
           <span class="dot green" />
           <em>the9@xauat:~</em>
@@ -267,19 +330,40 @@ onUnmounted(() => clearInterval(timer))
 }
 
 .hero-terminal {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  width: 480px;
   padding: 0;
   overflow: hidden;
   box-shadow: 0 30px 80px rgba(0, 0, 0, 0.55);
   animation: float 7s ease-in-out infinite;
+  user-select: none;
+}
+
+.hero-terminal.dragging {
+  animation: none;
+}
+
+.hero-terminal.has-moved {
+  right: auto;
+  transform: none;
 }
 
 .terminal-bar {
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 12px 16px;
+  padding: 14px 18px;
   border-bottom: 1px solid var(--border);
   background: rgba(255, 255, 255, 0.02);
+  cursor: grab;
+}
+
+.terminal-bar:active {
+  cursor: grabbing;
 }
 
 .terminal-bar em {
@@ -291,13 +375,20 @@ onUnmounted(() => clearInterval(timer))
 }
 
 .dot {
-  width: 10px;
-  height: 10px;
+  width: 12px;
+  height: 12px;
   border-radius: 50%;
 }
 .dot.red {
   background: #ff5f57;
+  cursor: pointer;
+  transition: transform 0.2s ease;
 }
+
+.dot.red:hover {
+  transform: scale(1.3);
+}
+
 .dot.amber {
   background: #febc2e;
 }
@@ -306,9 +397,9 @@ onUnmounted(() => clearInterval(timer))
 }
 
 .terminal-body {
-  padding: 22px 20px;
+  padding: 26px 24px;
   font-family: var(--mono);
-  font-size: 13px;
+  font-size: 15px;
   line-height: 1.9;
   color: var(--text-dim);
   overflow-x: auto;
