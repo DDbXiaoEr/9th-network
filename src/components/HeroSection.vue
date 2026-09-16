@@ -10,9 +10,11 @@ let timer
 // 终端状态
 const terminalVisible = ref(true)
 const isDragging = ref(false)
-const dragOffset = ref({ x: 0, y: 0 })
 const position = ref({ x: 0, y: 0 })
-const isInitialPosition = ref(true)
+
+let dragState = null
+let rafId = null
+let pendingPoint = null
 
 const heroSlides = config.site.heroSlides
 const stats = config.site.stats
@@ -29,44 +31,53 @@ const next = () => {
   current.value = (current.value + 1) % heroSlides.length
 }
 
-// 拖动开始
+// 拖动开始 - 缓存尺寸，避免拖动过程反复触发布局计算
 const onDragStart = (e) => {
-  isDragging.value = true
   const terminal = document.querySelector('.hero-terminal')
-  if (!terminal) return
-  
-  // 第一次拖动时，获取当前实际位置
-  if (isInitialPosition.value) {
-    const rect = terminal.getBoundingClientRect()
-    position.value = { x: rect.left, y: rect.top }
-    isInitialPosition.value = false
-  }
-  
-  dragOffset.value = {
-    x: e.clientX - position.value.x,
-    y: e.clientY - position.value.y
+  const container = document.querySelector('.hero-inner')
+  if (!terminal || !container) return
+
+  isDragging.value = true
+  const containerRect = container.getBoundingClientRect()
+  const terminalRect = terminal.getBoundingClientRect()
+
+  dragState = {
+    containerLeft: containerRect.left,
+    containerTop: containerRect.top,
+    maxX: containerRect.width - terminalRect.width,
+    maxY: containerRect.height - terminalRect.height,
+    offsetX: e.clientX - containerRect.left - position.value.x,
+    offsetY: e.clientY - containerRect.top - position.value.y
   }
 }
 
-// 拖动中 - 限制在窗口范围内
+// 拖动中 - 按帧节流，只做纯计算
 const onDragMove = (e) => {
-  if (!isDragging.value) return
-  const terminal = document.querySelector('.hero-terminal')
-  if (!terminal) return
+  if (!isDragging.value || !dragState) return
+  pendingPoint = { x: e.clientX, y: e.clientY }
+  if (rafId !== null) return
 
-  const rect = terminal.getBoundingClientRect()
-  const maxX = window.innerWidth - rect.width
-  const maxY = window.innerHeight - rect.height
-
-  position.value = {
-    x: Math.max(0, Math.min(e.clientX - dragOffset.value.x, maxX)),
-    y: Math.max(0, Math.min(e.clientY - dragOffset.value.y, maxY))
-  }
+  rafId = requestAnimationFrame(() => {
+    rafId = null
+    if (!dragState || !pendingPoint) return
+    const x = pendingPoint.x - dragState.containerLeft - dragState.offsetX
+    const y = pendingPoint.y - dragState.containerTop - dragState.offsetY
+    position.value = {
+      x: Math.max(0, Math.min(x, dragState.maxX)),
+      y: Math.max(0, Math.min(y, dragState.maxY))
+    }
+  })
 }
 
 // 拖动结束
 const onDragEnd = () => {
   isDragging.value = false
+  dragState = null
+  pendingPoint = null
+  if (rafId !== null) {
+    cancelAnimationFrame(rafId)
+    rafId = null
+  }
 }
 
 // 关闭终端
@@ -78,9 +89,22 @@ onMounted(() => {
   timer = setInterval(next, 6000)
   document.addEventListener('mousemove', onDragMove)
   document.addEventListener('mouseup', onDragEnd)
+  
+  // 计算终端初始位置：相对于 .hero-inner 容器右对齐、垂直居中
+  const terminal = document.querySelector('.hero-terminal')
+  const container = document.querySelector('.hero-inner')
+  if (terminal && container) {
+    const terminalRect = terminal.getBoundingClientRect()
+    const containerRect = container.getBoundingClientRect()
+    position.value = {
+      x: containerRect.width - terminalRect.width,
+      y: (containerRect.height - terminalRect.height) / 2
+    }
+  }
 })
 onUnmounted(() => {
   clearInterval(timer)
+  if (rafId !== null) cancelAnimationFrame(rafId)
   document.removeEventListener('mousemove', onDragMove)
   document.removeEventListener('mouseup', onDragEnd)
 })
@@ -135,8 +159,8 @@ onUnmounted(() => {
       <div
         v-if="terminalVisible"
         class="hero-terminal glass"
-        :class="{ dragging: isDragging, 'has-moved': !isInitialPosition }"
-        :style="isInitialPosition ? {} : { left: position.x + 'px', top: position.y + 'px' }"
+        :class="{ dragging: isDragging }"
+        :style="{ left: position.x + 'px', top: position.y + 'px' }"
       >
         <div class="terminal-bar" @mousedown="onDragStart">
           <span class="dot red" @click.stop="closeTerminal" />
@@ -331,9 +355,6 @@ onUnmounted(() => {
 
 .hero-terminal {
   position: absolute;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
   z-index: 10;
   width: 480px;
   padding: 0;
@@ -341,15 +362,11 @@ onUnmounted(() => {
   box-shadow: 0 30px 80px rgba(0, 0, 0, 0.55);
   animation: float 7s ease-in-out infinite;
   user-select: none;
+  will-change: left, top;
 }
 
 .hero-terminal.dragging {
   animation: none;
-}
-
-.hero-terminal.has-moved {
-  right: auto;
-  transform: none;
 }
 
 .terminal-bar {
