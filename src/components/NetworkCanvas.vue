@@ -43,7 +43,7 @@ const draw = () => {
       const b = nodes[j]
       const dist = Math.hypot(a.x - b.x, a.y - b.y)
       if (dist < 130) {
-        ctx.strokeStyle = `rgba(34, 211, 238, ${0.16 * (1 - dist / 130)})`
+        ctx.strokeStyle = `rgba(232, 163, 23, ${0.14 * (1 - dist / 130)})`
         ctx.lineWidth = 0.7
         ctx.beginPath()
         ctx.moveTo(a.x, a.y)
@@ -55,7 +55,7 @@ const draw = () => {
   for (const n of nodes) {
     ctx.beginPath()
     ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2)
-    ctx.fillStyle = 'rgba(103, 232, 249, 0.75)'
+    ctx.fillStyle = 'rgba(243, 197, 107, 0.55)'
     ctx.fill()
   }
   raf = requestAnimationFrame(draw)

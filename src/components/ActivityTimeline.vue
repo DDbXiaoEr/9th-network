@@ -116,9 +116,9 @@ const isEmpty = computed(() => !loading.value && !activities.value.length)
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  margin: 0 auto 28px;
+  margin: 0 0 28px;
   padding: 8px 16px;
-  border-radius: 999px;
+  border-radius: 0;
   font-size: 13px;
   color: var(--amber);
   background: rgba(245, 158, 11, 0.1);
@@ -128,7 +128,7 @@ const isEmpty = computed(() => !loading.value && !activities.value.length)
 .activities :deep(.container) {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: stretch;
 }
 
 .group {
@@ -143,7 +143,7 @@ const isEmpty = computed(() => !loading.value && !activities.value.length)
   font-family: var(--mono);
   font-size: 13px;
   letter-spacing: 0.16em;
-  color: var(--cyan);
+  color: var(--signal);
   margin: 0 0 22px 4px;
 }
 
@@ -155,9 +155,9 @@ const isEmpty = computed(() => !loading.value && !activities.value.length)
   width: 9px;
   height: 9px;
   border-radius: 50%;
-  background: var(--cyan);
-  box-shadow: 0 0 0 0 rgba(34, 211, 238, 0.6);
-  animation: pulse 2s infinite;
+  background: var(--signal);
+  box-shadow: none;
+  animation: none;
 }
 
 .dot-label {
@@ -168,20 +168,15 @@ const isEmpty = computed(() => !loading.value && !activities.value.length)
 }
 
 @keyframes pulse {
-  0% {
-    box-shadow: 0 0 0 0 rgba(34, 211, 238, 0.55);
-  }
-  70% {
-    box-shadow: 0 0 0 10px rgba(34, 211, 238, 0);
-  }
+  0%,
   100% {
-    box-shadow: 0 0 0 0 rgba(34, 211, 238, 0);
+    opacity: 1;
   }
 }
 
 .count {
   padding: 1px 9px;
-  border-radius: 999px;
+  border-radius: 0;
   font-size: 11px;
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid var(--border);
@@ -202,7 +197,7 @@ const isEmpty = computed(() => !loading.value && !activities.value.length)
   top: 8px;
   bottom: 8px;
   width: 2px;
-  background: linear-gradient(180deg, var(--cyan), rgba(139, 92, 246, 0.5), transparent);
+  background: linear-gradient(180deg, var(--signal), rgba(196, 92, 38, 0.4), transparent);
 }
 
 .tl-item {
@@ -227,8 +222,8 @@ const isEmpty = computed(() => !loading.value && !activities.value.length)
 }
 
 .tl-dot.upcoming {
-  border-color: var(--cyan);
-  box-shadow: 0 0 12px rgba(34, 211, 238, 0.7);
+  border-color: var(--signal);
+  background: var(--signal);
 }
 
 .tl-card {
@@ -237,9 +232,8 @@ const isEmpty = computed(() => !loading.value && !activities.value.length)
 }
 
 .tl-card:hover {
-  transform: translateX(6px);
+  transform: translateX(4px);
   border-color: var(--border-strong);
-  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.4);
 }
 
 .tl-top {
@@ -252,7 +246,7 @@ const isEmpty = computed(() => !loading.value && !activities.value.length)
 .tl-type {
   font-size: 11.5px;
   padding: 3px 10px;
-  border-radius: 999px;
+  border-radius: 0;
   color: var(--text-dim);
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid var(--border);
@@ -263,12 +257,12 @@ const isEmpty = computed(() => !loading.value && !activities.value.length)
   font-size: 11px;
   letter-spacing: 0.12em;
   padding: 3px 10px;
-  border-radius: 999px;
+  border-radius: 0;
 }
 
 .tl-status.upcoming {
-  color: #04121a;
-  background: linear-gradient(120deg, var(--cyan), var(--cyan-soft));
+  color: var(--ink);
+  background: var(--signal);
 }
 
 .tl-status.past {
@@ -306,7 +300,7 @@ const isEmpty = computed(() => !loading.value && !activities.value.length)
 }
 
 .tl-meta span :deep(.icon) {
-  color: var(--cyan);
+  color: var(--signal);
 }
 
 .empty {

@@ -117,13 +117,13 @@ onUnmounted(() => window.removeEventListener('scroll', onScroll))
 }
 
 .nav.scrolled {
-  background: rgba(18, 26, 45, 0.82);
-  backdrop-filter: blur(16px);
+  background: rgba(16, 14, 12, 0.9);
+  backdrop-filter: blur(14px);
   border-bottom-color: var(--border);
 }
 
 .nav-inner {
-  height: 72px;
+  height: 76px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -140,20 +140,19 @@ onUnmounted(() => window.removeEventListener('scroll', onScroll))
 }
 
 .brand-mark {
-  width: 42px;
-  height: 42px;
-  border-radius: 12px;
+  width: 40px;
+  height: 40px;
+  border-radius: 2px;
   display: grid;
   place-items: center;
-  background: linear-gradient(135deg, rgba(34, 211, 238, 0.2), rgba(139, 92, 246, 0.25));
+  background: var(--ink);
   border: 1px solid var(--border-strong);
-  box-shadow: 0 0 22px rgba(34, 211, 238, 0.25);
 }
 
 .brand-mark img {
   width: 26px;
   height: 26px;
-  border-radius: 6px;
+  border-radius: 2px;
 }
 
 .brand-text {
@@ -164,16 +163,18 @@ onUnmounted(() => window.removeEventListener('scroll', onScroll))
 }
 
 .brand-text strong {
-  font-size: 16px;
-  letter-spacing: 0.04em;
+  font-family: var(--serif);
+  font-size: 17px;
+  letter-spacing: 0.08em;
+  font-weight: 700;
 }
 
 .brand-text em {
   font-family: var(--mono);
   font-style: normal;
   font-size: 9px;
-  letter-spacing: 0.22em;
-  color: var(--cyan);
+  letter-spacing: 0.18em;
+  color: var(--signal);
 }
 
 .links {
@@ -188,31 +189,27 @@ onUnmounted(() => window.removeEventListener('scroll', onScroll))
   border: 0;
   color: var(--text-dim);
   font-size: 14px;
-  padding: 10px 16px;
-  border-radius: 10px;
-  transition: color 0.2s ease, background 0.2s ease;
+  padding: 10px 14px;
+  border-radius: 0;
+  transition: color 0.2s ease;
 }
 
 .link:hover {
   color: var(--text);
-  background: rgba(255, 255, 255, 0.04);
 }
 
 .link.active {
-  color: var(--cyan);
+  color: var(--signal);
 }
 
 .link.active::after {
   content: '';
   position: absolute;
-  left: 50%;
+  left: 14px;
+  right: 14px;
   bottom: 4px;
-  transform: translateX(-50%);
-  width: 18px;
-  height: 2px;
-  border-radius: 2px;
-  background: var(--cyan);
-  box-shadow: 0 0 10px var(--cyan);
+  height: 1px;
+  background: var(--signal);
 }
 
 .cta {
@@ -220,26 +217,25 @@ onUnmounted(() => window.removeEventListener('scroll', onScroll))
   align-items: center;
   gap: 8px;
   margin-left: 12px;
-  padding: 10px 18px;
-  border-radius: 10px;
-  border: 1px solid var(--border-strong);
-  background: linear-gradient(135deg, rgba(34, 211, 238, 0.16), rgba(139, 92, 246, 0.16));
-  color: var(--text);
-  font-size: 14px;
+  padding: 9px 16px;
+  border-radius: 0;
+  border: 1px solid var(--signal);
+  background: var(--signal);
+  color: var(--ink);
+  font-size: 13px;
   font-weight: 600;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: background 0.2s ease, color 0.2s ease;
 }
 
 .cta:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 8px 26px rgba(34, 211, 238, 0.28);
+  background: var(--signal-soft);
 }
 
 .toggle {
   display: none;
   background: none;
   border: 1px solid var(--border);
-  border-radius: 10px;
+  border-radius: 0;
   padding: 8px;
   color: var(--text);
 }
@@ -252,16 +248,16 @@ onUnmounted(() => window.removeEventListener('scroll', onScroll))
 
   .links {
     position: absolute;
-    top: 72px;
+    top: 76px;
     left: 4vw;
     right: 4vw;
     flex-direction: column;
     align-items: stretch;
     padding: 16px;
     gap: 6px;
-    background: rgba(20, 29, 50, 0.96);
+    background: rgba(16, 14, 12, 0.96);
     border: 1px solid var(--border);
-    border-radius: var(--radius);
+    border-radius: 0;
     backdrop-filter: blur(18px);
     opacity: 0;
     transform: translateY(-12px);

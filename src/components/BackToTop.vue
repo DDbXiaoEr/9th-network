@@ -54,17 +54,17 @@ onUnmounted(() => window.removeEventListener('scroll', onScroll))
   place-items: center;
   width: 46px;
   height: 46px;
-  border-radius: 50%;
+  border-radius: 0;
   border: 1px solid var(--border-strong);
-  background: rgba(20, 29, 50, 0.85);
+  background: rgba(16, 14, 12, 0.9);
   backdrop-filter: blur(10px);
-  color: var(--cyan);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  color: var(--signal);
+  transition: transform 0.2s ease, background 0.2s ease;
 }
 
 .back:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 30px rgba(34, 211, 238, 0.3);
+  transform: translateY(-2px);
+  background: rgba(232, 163, 23, 0.12);
 }
 
 .ring {
@@ -82,7 +82,7 @@ onUnmounted(() => window.removeEventListener('scroll', onScroll))
 }
 
 .ring-fg {
-  stroke: var(--cyan);
+  stroke: var(--signal);
   stroke-linecap: round;
   stroke-dasharray: 126;
   transition: stroke-dashoffset 0.15s linear;

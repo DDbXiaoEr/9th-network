@@ -66,29 +66,26 @@ const joinInfo = config.site.joinInfo
   display: flex;
   align-items: center;
   gap: 24px;
-  padding: 34px 36px;
+  padding: 32px 34px;
   margin-bottom: 24px;
   overflow: hidden;
+  border-radius: 0;
   border-color: var(--border-strong);
 }
 
 .notice::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(120deg, rgba(34, 211, 238, 0.1), rgba(139, 92, 246, 0.1));
-  pointer-events: none;
+  display: none;
 }
 
 .notice-icon {
   position: relative;
   display: grid;
   place-items: center;
-  width: 66px;
-  height: 66px;
-  border-radius: 18px;
-  color: var(--cyan);
-  background: rgba(34, 211, 238, 0.12);
+  width: 58px;
+  height: 58px;
+  border-radius: 0;
+  color: var(--signal);
+  background: rgba(232, 163, 23, 0.1);
   border: 1px solid var(--border-strong);
   flex-shrink: 0;
 }
@@ -115,11 +112,11 @@ const joinInfo = config.site.joinInfo
   position: relative;
   font-family: var(--mono);
   font-size: 12px;
-  letter-spacing: 0.08em;
-  padding: 8px 16px;
-  border-radius: 999px;
-  color: #04121a;
-  background: linear-gradient(120deg, var(--cyan), var(--cyan-soft));
+  letter-spacing: 0.06em;
+  padding: 8px 14px;
+  border-radius: 0;
+  color: var(--ink);
+  background: var(--signal);
   white-space: nowrap;
   flex-shrink: 0;
 }
@@ -135,25 +132,22 @@ const joinInfo = config.site.joinInfo
 .step {
   position: relative;
   padding: 26px 22px;
-  transition: transform 0.26s ease, border-color 0.26s ease;
+  border-radius: 0;
+  transition: border-color 0.2s ease;
 }
 
 .step:hover {
-  transform: translateY(-5px);
   border-color: var(--border-strong);
 }
 
 .step-index {
   display: block;
-  font-family: var(--mono);
-  font-size: 26px;
-  font-weight: 800;
+  font-family: var(--serif);
+  font-size: 28px;
+  font-weight: 700;
   line-height: 1;
   margin-bottom: 14px;
-  background: linear-gradient(120deg, var(--cyan), var(--violet));
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  color: var(--signal);
 }
 
 .step h4 {
@@ -185,27 +179,26 @@ const joinInfo = config.site.joinInfo
 }
 
 .note :deep(.icon) {
-  color: var(--green);
+  color: var(--signal);
 }
 
 .cta-btn {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 13px 28px;
-  border-radius: 12px;
+  padding: 13px 24px;
+  border-radius: 0;
   border: 0;
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 600;
-  color: #04121a;
-  background: linear-gradient(120deg, var(--cyan), var(--cyan-soft));
+  color: var(--ink);
+  background: var(--signal);
   white-space: nowrap;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: background 0.2s ease;
 }
 
 .cta-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 16px 40px rgba(34, 211, 238, 0.4);
+  background: var(--signal-soft);
 }
 
 @media (max-width: 900px) {

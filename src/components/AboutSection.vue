@@ -79,36 +79,36 @@ const aboutTabs = config.site.aboutTabs
 <style scoped>
 .about {
   padding: 8px;
+  border-radius: 0;
 }
 
 .tabs {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
-  padding: 12px;
+  gap: 0;
+  padding: 0 8px;
   border-bottom: 1px solid var(--border);
 }
 
 .tab {
-  padding: 10px 20px;
-  border-radius: 10px;
-  border: 1px solid transparent;
+  padding: 14px 22px;
+  border-radius: 0;
+  border: 0;
+  border-bottom: 2px solid transparent;
   background: transparent;
   color: var(--text-dim);
   font-size: 14px;
-  transition: all 0.22s ease;
+  margin-bottom: -1px;
+  transition: color 0.2s ease, border-color 0.2s ease;
 }
 
 .tab:hover {
   color: var(--text);
-  background: rgba(255, 255, 255, 0.04);
 }
 
 .tab.active {
-  color: var(--cyan);
-  border-color: var(--border-strong);
-  background: rgba(34, 211, 238, 0.08);
-  box-shadow: 0 0 20px rgba(34, 211, 238, 0.15) inset;
+  color: var(--signal);
+  border-bottom-color: var(--signal);
 }
 
 .panel {
@@ -127,17 +127,15 @@ const aboutTabs = config.site.aboutTabs
 
 .media img {
   width: 100%;
-  border-radius: var(--radius-sm);
+  border-radius: 0;
   border: 1px solid var(--border);
   object-fit: cover;
   max-height: 260px;
+  filter: saturate(0.7) sepia(0.12);
 }
 
 .media-glow {
-  position: absolute;
-  inset: -20%;
-  z-index: -1;
-  background: radial-gradient(circle at 30% 30%, rgba(34, 211, 238, 0.18), transparent 60%);
+  display: none;
 }
 
 .content {
@@ -156,18 +154,19 @@ const aboutTabs = config.site.aboutTabs
 }
 
 .member {
-  padding: 16px;
-  border-radius: var(--radius-sm);
-  border: 1px solid var(--border);
-  background: rgba(255, 255, 255, 0.02);
+  padding: 16px 0;
+  border-radius: 0;
+  border: 0;
+  border-bottom: 1px solid var(--border);
+  background: none;
 }
 
 .role {
   display: block;
   font-family: var(--mono);
   font-size: 12px;
-  letter-spacing: 0.16em;
-  color: var(--cyan);
+  letter-spacing: 0.08em;
+  color: var(--signal);
   margin-bottom: 10px;
 }
 
@@ -178,11 +177,11 @@ const aboutTabs = config.site.aboutTabs
 }
 
 .name {
-  padding: 4px 12px;
-  border-radius: 999px;
+  padding: 3px 10px;
+  border-radius: 0;
   font-size: 13px;
-  background: rgba(139, 92, 246, 0.12);
-  border: 1px solid rgba(139, 92, 246, 0.3);
+  background: rgba(232, 163, 23, 0.08);
+  border: 1px solid var(--border);
   color: var(--text);
 }
 
@@ -207,7 +206,7 @@ const aboutTabs = config.site.aboutTabs
 
 .dev-list li :deep(.icon) {
   margin-top: 5px;
-  color: var(--cyan);
+  color: var(--signal);
   flex-shrink: 0;
 }
 

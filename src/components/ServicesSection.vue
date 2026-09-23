@@ -178,7 +178,7 @@ const goJoin = () => {
 .filters {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 10px;
   margin-bottom: 40px;
 }
@@ -187,13 +187,13 @@ const goJoin = () => {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 10px 18px;
-  border-radius: 999px;
+  padding: 8px 16px;
+  border-radius: 0;
   border: 1px solid var(--border);
-  background: rgba(255, 255, 255, 0.02);
+  background: transparent;
   color: var(--text-dim);
-  font-size: 14px;
-  transition: all 0.22s ease;
+  font-size: 13px;
+  transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
 }
 
 .filter:hover {
@@ -202,18 +202,17 @@ const goJoin = () => {
 }
 
 .filter.active {
-  color: #04121a;
-  background: linear-gradient(120deg, var(--cyan), var(--cyan-soft));
-  border-color: transparent;
+  color: var(--ink);
+  background: var(--signal);
+  border-color: var(--signal);
   font-weight: 600;
-  box-shadow: 0 8px 26px rgba(34, 211, 238, 0.3);
 }
 
 .count {
   font-family: var(--mono);
   font-size: 11px;
   padding: 1px 7px;
-  border-radius: 999px;
+  border-radius: 0;
   background: rgba(0, 0, 0, 0.18);
 }
 
@@ -228,26 +227,17 @@ const goJoin = () => {
   padding: 26px 24px;
   cursor: pointer;
   overflow: hidden;
-  transition: transform 0.28s ease, border-color 0.28s ease, box-shadow 0.28s ease;
+  border-radius: 0;
+  transition: border-color 0.2s ease, transform 0.2s ease;
 }
 
 .card::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at 100% 0%, rgba(34, 211, 238, 0.14), transparent 55%);
-  opacity: 0;
-  transition: opacity 0.28s ease;
+  display: none;
 }
 
 .card:hover {
-  transform: translateY(-6px);
+  transform: translateY(-3px);
   border-color: var(--border-strong);
-  box-shadow: 0 22px 50px rgba(0, 0, 0, 0.45);
-}
-
-.card:hover::before {
-  opacity: 1;
 }
 
 .hot {
@@ -256,12 +246,12 @@ const goJoin = () => {
   right: 0;
   font-family: var(--mono);
   font-size: 10px;
-  letter-spacing: 0.2em;
-  padding: 4px 12px;
-  border-radius: 0 var(--radius) 0 12px;
-  background: linear-gradient(120deg, var(--amber), #fb7185);
-  color: #1a0f00;
-  font-weight: 700;
+  letter-spacing: 0.12em;
+  padding: 4px 10px;
+  border-radius: 0;
+  background: var(--brick);
+  color: #fff8ee;
+  font-weight: 600;
 }
 
 .card-top {
@@ -274,18 +264,18 @@ const goJoin = () => {
 .card-icon {
   display: grid;
   place-items: center;
-  width: 52px;
-  height: 52px;
-  border-radius: 14px;
-  color: var(--cyan);
-  background: linear-gradient(135deg, rgba(34, 211, 238, 0.14), rgba(139, 92, 246, 0.14));
+  width: 48px;
+  height: 48px;
+  border-radius: 0;
+  color: var(--signal);
+  background: rgba(232, 163, 23, 0.08);
   border: 1px solid var(--border);
 }
 
 .card-icon.large {
-  width: 64px;
-  height: 64px;
-  color: var(--cyan-soft);
+  width: 58px;
+  height: 58px;
+  color: var(--signal-soft);
 }
 
 .status {
@@ -293,7 +283,7 @@ const goJoin = () => {
   font-size: 11px;
   color: var(--text-mute);
   padding: 4px 10px;
-  border-radius: 999px;
+  border-radius: 0;
   border: 1px solid var(--border);
 }
 
@@ -327,10 +317,10 @@ const goJoin = () => {
 
 .tags span {
   font-size: 11.5px;
-  padding: 3px 9px;
-  border-radius: 6px;
+  padding: 3px 8px;
+  border-radius: 0;
   color: var(--text-dim);
-  background: rgba(255, 255, 255, 0.04);
+  background: transparent;
   border: 1px solid var(--border);
 }
 
@@ -339,7 +329,7 @@ const goJoin = () => {
   align-items: center;
   gap: 4px;
   font-size: 13px;
-  color: var(--cyan);
+  color: var(--signal);
   white-space: nowrap;
 }
 
@@ -353,7 +343,7 @@ const goJoin = () => {
 .link-btn {
   background: none;
   border: 0;
-  color: var(--cyan);
+  color: var(--signal);
   font-size: 14px;
   text-decoration: underline;
   text-underline-offset: 3px;
@@ -366,7 +356,7 @@ const goJoin = () => {
   display: grid;
   place-items: center;
   padding: 20px;
-  background: rgba(10, 16, 30, 0.72);
+  background: rgba(12, 10, 8, 0.78);
   backdrop-filter: blur(6px);
 }
 
@@ -374,7 +364,8 @@ const goJoin = () => {
   position: relative;
   width: min(520px, 100%);
   padding: 34px 30px 30px;
-  box-shadow: 0 40px 100px rgba(0, 0, 0, 0.6);
+  border-radius: 0;
+  box-shadow: 10px 14px 0 rgba(196, 92, 38, 0.22);
 }
 
 .close {
@@ -384,7 +375,7 @@ const goJoin = () => {
   display: grid;
   place-items: center;
   padding: 8px;
-  border-radius: 10px;
+  border-radius: 0;
   border: 1px solid var(--border);
   background: rgba(255, 255, 255, 0.03);
   color: var(--text-dim);
@@ -407,7 +398,7 @@ const goJoin = () => {
   font-family: var(--mono);
   font-size: 11px;
   letter-spacing: 0.18em;
-  color: var(--cyan);
+  color: var(--signal);
 }
 
 .modal-head h3 {
@@ -431,7 +422,7 @@ const goJoin = () => {
 
 .modal-meta > div {
   padding: 14px;
-  border-radius: var(--radius-sm);
+  border-radius: 0;
   border: 1px solid var(--border);
   background: rgba(255, 255, 255, 0.02);
 }
@@ -456,23 +447,22 @@ const goJoin = () => {
   gap: 8px;
   width: 100%;
   padding: 14px;
-  border-radius: 12px;
+  border-radius: 0;
   border: 0;
   font-size: 15px;
   font-weight: 600;
-  color: #04121a;
-  background: linear-gradient(120deg, var(--cyan), var(--cyan-soft));
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  color: var(--ink);
+  background: var(--signal);
+  transition: background 0.2s ease;
 }
 
 .modal-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 14px 34px rgba(34, 211, 238, 0.4);
+  background: var(--signal-soft);
 }
 
 .prompt-mask {
   z-index: 300;
-  background: rgba(6, 10, 20, 0.78);
+  background: rgba(12, 10, 8, 0.82);
 }
 
 .prompt {
@@ -480,7 +470,8 @@ const goJoin = () => {
   width: min(440px, 100%);
   padding: 34px 30px 28px;
   text-align: center;
-  box-shadow: 0 40px 100px rgba(0, 0, 0, 0.6);
+  border-radius: 0;
+  box-shadow: 10px 14px 0 rgba(196, 92, 38, 0.22);
 }
 
 .prompt-title {

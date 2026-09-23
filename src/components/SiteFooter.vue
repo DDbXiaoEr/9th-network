@@ -86,7 +86,7 @@ const openLink = (url) => {
   position: relative;
   margin-top: 40px;
   border-top: 1px solid var(--border);
-  background: linear-gradient(180deg, rgba(26, 36, 64, 0.35), rgba(18, 26, 45, 0.88));
+  background: #0c0a08;
 }
 
 .footer-inner {
@@ -106,15 +106,16 @@ const openLink = (url) => {
 .brand img {
   width: 44px;
   height: 44px;
-  border-radius: 12px;
+  border-radius: 2px;
   border: 1px solid var(--border-strong);
   padding: 6px;
-  background: rgba(34, 211, 238, 0.06);
+  background: var(--ink);
 }
 
 .brand strong {
   display: block;
-  font-size: 17px;
+  font-family: var(--serif);
+  font-size: 18px;
   color: var(--text);
 }
 
@@ -122,8 +123,8 @@ const openLink = (url) => {
   font-family: var(--mono);
   font-style: normal;
   font-size: 9px;
-  letter-spacing: 0.22em;
-  color: var(--cyan);
+  letter-spacing: 0.16em;
+  color: var(--signal);
 }
 
 .brand-col > p {
@@ -145,11 +146,10 @@ const openLink = (url) => {
 
 .link-col h4 {
   font-size: 13px;
-  letter-spacing: 0.12em;
-  font-family: var(--mono);
-  color: var(--cyan);
+  letter-spacing: 0.08em;
+  font-family: var(--serif);
+  color: var(--signal);
   margin-bottom: 16px;
-  text-transform: uppercase;
 }
 
 .link-col ul {
@@ -169,7 +169,7 @@ const openLink = (url) => {
 }
 
 .link-col button:hover {
-  color: var(--cyan-soft);
+  color: var(--signal-soft);
   transform: translateX(3px);
 }
 
@@ -189,7 +189,7 @@ const openLink = (url) => {
   font-size: 13px;
   letter-spacing: 0.12em;
   font-family: var(--mono);
-  color: var(--cyan);
+  color: var(--signal);
   white-space: nowrap;
 }
 
@@ -209,7 +209,7 @@ const openLink = (url) => {
 }
 
 .friend-links-list button:hover {
-  color: var(--cyan-soft);
+  color: var(--signal-soft);
 }
 
 .footer-bottom {
@@ -233,7 +233,7 @@ const openLink = (url) => {
 }
 
 .icp:hover {
-  color: var(--cyan-soft);
+  color: var(--signal-soft);
 }
 
 .mono {

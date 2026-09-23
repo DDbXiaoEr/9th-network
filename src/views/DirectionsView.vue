@@ -194,41 +194,41 @@ const goHomeSection = async (id) => {
 .page-hero {
   position: relative;
   padding: 150px 0 40px;
-  text-align: center;
+  text-align: left;
   overflow: hidden;
 }
 
 .page-hero::before {
   content: '';
   position: absolute;
-  top: -40%;
-  left: 50%;
-  width: 720px;
-  height: 720px;
-  transform: translateX(-50%);
-  background: radial-gradient(circle, rgba(34, 211, 238, 0.16), transparent 62%);
+  top: -20%;
+  left: -8%;
+  width: 520px;
+  height: 520px;
+  background: radial-gradient(circle, rgba(196, 92, 38, 0.16), transparent 64%);
   z-index: -1;
 }
 
 .page-title {
-  margin-top: 20px;
-  font-size: clamp(34px, 6vw, 60px);
-  font-weight: 900;
-  letter-spacing: -0.02em;
-  line-height: 1.1;
+  margin-top: 16px;
+  font-family: var(--serif);
+  font-size: clamp(34px, 6vw, 58px);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  line-height: 1.15;
   color: var(--text);
 }
 
 .page-title .grad {
-  background: linear-gradient(120deg, var(--cyan) 0%, var(--cyan-soft) 40%, var(--violet) 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  color: var(--signal);
+  background: none;
+  -webkit-background-clip: unset;
+  background-clip: unset;
 }
 
 .page-sub {
-  max-width: 720px;
-  margin: 18px auto 0;
+  max-width: 640px;
+  margin: 16px 0 0;
   color: var(--text-dim);
   font-size: 15px;
 }
@@ -238,48 +238,40 @@ const goHomeSection = async (id) => {
   align-items: center;
   gap: 6px;
   margin-top: 24px;
-  padding: 9px 18px;
-  border-radius: 999px;
+  padding: 8px 14px;
+  border-radius: 0;
   border: 1px solid var(--border);
-  background: rgba(255, 255, 255, 0.02);
+  background: transparent;
   color: var(--text-dim);
   font-size: 13px;
-  transition: all 0.2s ease;
+  transition: color 0.2s ease, border-color 0.2s ease;
 }
 
 .back-home:hover {
-  color: var(--cyan);
+  color: var(--signal);
   border-color: var(--border-strong);
 }
 
 .dir-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 24px;
+  gap: 20px;
 }
 
 .dir-card {
   position: relative;
-  padding: 34px 32px;
+  padding: 30px 28px;
   overflow: hidden;
-  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 0;
+  transition: border-color 0.2s ease;
 }
 
 .dir-card:hover {
-  transform: translateY(-6px);
   border-color: var(--border-strong);
-  box-shadow: 0 26px 60px rgba(0, 0, 0, 0.45);
 }
 
 .dir-glow {
-  position: absolute;
-  top: -60px;
-  right: -60px;
-  width: 220px;
-  height: 220px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(34, 211, 238, 0.18), transparent 68%);
-  pointer-events: none;
+  display: none;
 }
 
 .dir-top {
@@ -292,16 +284,17 @@ const goHomeSection = async (id) => {
 .dir-icon {
   display: grid;
   place-items: center;
-  width: 58px;
-  height: 58px;
-  border-radius: 16px;
-  color: var(--cyan);
-  background: linear-gradient(135deg, rgba(34, 211, 238, 0.16), rgba(139, 92, 246, 0.16));
+  width: 50px;
+  height: 50px;
+  border-radius: 0;
+  color: var(--signal);
+  background: rgba(232, 163, 23, 0.08);
   border: 1px solid var(--border-strong);
   flex-shrink: 0;
 }
 
 .dir-top h3 {
+  font-family: var(--serif);
   font-size: 21px;
   color: var(--text);
 }
@@ -310,8 +303,8 @@ const goHomeSection = async (id) => {
   margin-top: 4px;
   font-family: var(--mono);
   font-size: 12px;
-  letter-spacing: 0.06em;
-  color: var(--cyan-soft);
+  letter-spacing: 0.04em;
+  color: var(--signal-soft);
 }
 
 .dir-desc {
@@ -339,7 +332,7 @@ const goHomeSection = async (id) => {
 
 .dir-list li :deep(.icon) {
   margin-top: 4px;
-  color: var(--cyan);
+  color: var(--signal);
   flex-shrink: 0;
 }
 
@@ -354,10 +347,10 @@ const goHomeSection = async (id) => {
 .dir-stack span {
   font-family: var(--mono);
   font-size: 11.5px;
-  padding: 4px 11px;
-  border-radius: 7px;
+  padding: 4px 10px;
+  border-radius: 0;
   color: var(--text-dim);
-  background: rgba(255, 255, 255, 0.04);
+  background: transparent;
   border: 1px solid var(--border);
 }
 
@@ -366,9 +359,10 @@ const goHomeSection = async (id) => {
   display: flex;
   align-items: center;
   gap: 36px;
-  padding: 34px 40px;
+  padding: 32px 36px;
   margin-bottom: 24px;
   overflow: hidden;
+  border-radius: 0;
   border-color: var(--border-strong);
 }
 
@@ -382,20 +376,17 @@ const goHomeSection = async (id) => {
   display: block;
   font-family: var(--mono);
   font-size: 11px;
-  letter-spacing: 0.2em;
-  color: var(--cyan);
+  letter-spacing: 0.08em;
+  color: var(--signal);
   margin-bottom: 8px;
 }
 
 .rank-value {
-  font-family: var(--mono);
+  font-family: var(--serif);
   font-size: clamp(48px, 8vw, 76px);
-  font-weight: 800;
+  font-weight: 700;
   line-height: 1;
-  background: linear-gradient(120deg, var(--cyan), var(--violet));
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  color: var(--signal);
 }
 
 .rank-value em {
@@ -403,10 +394,11 @@ const goHomeSection = async (id) => {
   font-style: normal;
   margin-left: 6px;
   color: var(--text-dim);
-  -webkit-text-fill-color: var(--text-dim);
+  font-family: var(--sans);
 }
 
 .rank-right h3 {
+  font-family: var(--serif);
   font-size: clamp(18px, 2.4vw, 24px);
   color: var(--text);
   margin-bottom: 8px;
@@ -421,7 +413,7 @@ const goHomeSection = async (id) => {
   position: absolute;
   right: 28px;
   bottom: -26px;
-  color: rgba(34, 211, 238, 0.12);
+  color: rgba(232, 163, 23, 0.1);
 }
 
 .ctf-grid {
@@ -432,7 +424,8 @@ const goHomeSection = async (id) => {
 }
 
 .team-card {
-  padding: 30px 28px;
+  padding: 28px 26px;
+  border-radius: 0;
 }
 
 .team-head {
@@ -445,15 +438,16 @@ const goHomeSection = async (id) => {
 .team-logo {
   display: grid;
   place-items: center;
-  width: 52px;
-  height: 52px;
-  border-radius: 14px;
-  color: var(--cyan);
-  background: rgba(34, 211, 238, 0.1);
+  width: 48px;
+  height: 48px;
+  border-radius: 0;
+  color: var(--signal);
+  background: rgba(232, 163, 23, 0.1);
   border: 1px solid var(--border-strong);
 }
 
 .team-head h3 {
+  font-family: var(--serif);
   font-size: 20px;
   color: var(--text);
 }
@@ -465,7 +459,7 @@ const goHomeSection = async (id) => {
 
 .team-slogan {
   font-size: 13.5px;
-  color: var(--cyan-soft);
+  color: var(--signal-soft);
   font-style: italic;
   margin-bottom: 20px;
 }
@@ -505,21 +499,19 @@ const goHomeSection = async (id) => {
   align-items: center;
   gap: 8px;
   margin-top: 20px;
-  padding: 10px 18px;
-  border-radius: 10px;
+  padding: 10px 16px;
+  border-radius: 0;
   border: 1px solid var(--border-strong);
-  background: rgba(34, 211, 238, 0.08);
-  color: var(--cyan-soft);
+  background: transparent;
+  color: var(--signal-soft);
   font-size: 13.5px;
   font-weight: 600;
-  transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  transition: background 0.2s ease, color 0.2s ease;
 }
 
 .team-link:hover {
-  background: rgba(34, 211, 238, 0.16);
+  background: rgba(232, 163, 23, 0.12);
   color: var(--text);
-  transform: translateY(-1px);
-  box-shadow: 0 10px 26px rgba(34, 211, 238, 0.25);
 }
 
 .members {
@@ -537,12 +529,13 @@ const goHomeSection = async (id) => {
   display: flex;
   align-items: center;
   gap: 8px;
+  font-family: var(--serif);
   font-size: 18px;
   color: var(--text);
 }
 
 .members-head h3 :deep(.icon) {
-  color: var(--cyan);
+  color: var(--signal);
 }
 
 .members-head > span {
@@ -554,32 +547,33 @@ const goHomeSection = async (id) => {
 .member-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
-  gap: 14px;
+  gap: 12px;
 }
 
 .member {
   display: flex;
   align-items: center;
   gap: 14px;
-  padding: 16px;
-  transition: transform 0.24s ease, border-color 0.24s ease;
+  padding: 14px;
+  border-radius: 0;
+  transition: border-color 0.2s ease;
 }
 
 .member:hover {
-  transform: translateY(-3px);
   border-color: var(--border-strong);
 }
 
 .avatar {
   display: grid;
   place-items: center;
-  width: 44px;
-  height: 44px;
-  border-radius: 12px;
-  font-size: 18px;
+  width: 40px;
+  height: 40px;
+  border-radius: 0;
+  font-family: var(--serif);
+  font-size: 16px;
   font-weight: 700;
-  color: #04121a;
-  background: linear-gradient(135deg, var(--cyan), var(--cyan-soft));
+  color: var(--ink);
+  background: var(--signal);
   flex-shrink: 0;
 }
 
@@ -615,9 +609,9 @@ const goHomeSection = async (id) => {
 
 .role {
   padding: 2px 8px;
-  border-radius: 999px;
-  color: var(--cyan-soft);
-  background: rgba(34, 211, 238, 0.1);
+  border-radius: 0;
+  color: var(--signal-soft);
+  background: rgba(232, 163, 23, 0.1);
   border: 1px solid var(--border);
 }
 
@@ -629,6 +623,7 @@ const goHomeSection = async (id) => {
   display: flex;
   align-items: center;
   gap: 8px;
+  font-family: var(--serif);
   font-size: 18px;
   color: var(--text);
   margin-bottom: 16px;
@@ -640,7 +635,8 @@ const goHomeSection = async (id) => {
 
 .table-wrap {
   overflow-x: auto;
-  padding: 4px;
+  padding: 0;
+  border-radius: 0;
 }
 
 table {
@@ -660,14 +656,13 @@ td {
 thead th {
   font-family: var(--mono);
   font-size: 11px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
+  letter-spacing: 0.08em;
   color: var(--text-mute);
   border-bottom: 1px solid var(--border);
 }
 
 tbody tr {
-  border-bottom: 1px solid rgba(110, 231, 249, 0.08);
+  border-bottom: 1px solid var(--border);
   transition: background 0.2s ease;
 }
 
@@ -676,11 +671,11 @@ tbody tr:last-child {
 }
 
 tbody tr:hover {
-  background: rgba(34, 211, 238, 0.05);
+  background: rgba(232, 163, 23, 0.05);
 }
 
 tbody tr.best {
-  background: linear-gradient(90deg, rgba(34, 211, 238, 0.12), transparent 70%);
+  background: rgba(232, 163, 23, 0.1);
 }
 
 .date {
@@ -695,20 +690,20 @@ tbody tr.best {
 
 .type {
   font-size: 11.5px;
-  padding: 3px 10px;
-  border-radius: 999px;
+  padding: 3px 8px;
+  border-radius: 0;
   color: var(--text-dim);
-  background: rgba(255, 255, 255, 0.04);
+  background: transparent;
   border: 1px solid var(--border);
 }
 
 .result {
-  color: var(--cyan-soft);
+  color: var(--signal-soft);
   font-weight: 600;
 }
 
 tr.best .result {
-  color: var(--cyan);
+  color: var(--signal);
 }
 
 .note {
@@ -721,13 +716,14 @@ tr.best .result {
   justify-content: space-between;
   gap: 20px;
   margin-top: 32px;
-  padding: 30px 34px;
-  border-radius: var(--radius);
+  padding: 28px 32px;
+  border-radius: 0;
   border: 1px solid var(--border-strong);
-  background: linear-gradient(120deg, rgba(34, 211, 238, 0.1), rgba(139, 92, 246, 0.12));
+  background: rgba(232, 163, 23, 0.08);
 }
 
 .ctf-cta h3 {
+  font-family: var(--serif);
   font-size: 20px;
   color: var(--text);
   margin-bottom: 6px;
@@ -742,20 +738,19 @@ tr.best .result {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 13px 28px;
-  border-radius: 12px;
+  padding: 12px 22px;
+  border-radius: 0;
   border: 0;
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 600;
-  color: #04121a;
-  background: linear-gradient(120deg, var(--cyan), var(--cyan-soft));
+  color: var(--ink);
+  background: var(--signal);
   white-space: nowrap;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: background 0.2s ease;
 }
 
 .cta-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 16px 40px rgba(34, 211, 238, 0.4);
+  background: var(--signal-soft);
 }
 
 @media (max-width: 900px) {
@@ -770,7 +765,7 @@ tr.best .result {
     flex-direction: column;
     align-items: flex-start;
     gap: 20px;
-    padding: 26px 24px;
+    padding: 26px 22px;
   }
   .rank-left {
     padding-right: 0;

@@ -1,25 +1,29 @@
 :root {
-  --bg: #121a2d;
-  --bg-soft: #1a2440;
-  --panel: rgba(30, 42, 72, 0.66);
-  --panel-solid: #1b2540;
-  --border: rgba(110, 231, 249, 0.22);
-  --border-strong: rgba(110, 231, 249, 0.5);
-  --text: #eef4ff;
-  --text-dim: #b2c1de;
-  --text-mute: #8494b3;
-  --cyan: #22d3ee;
-  --cyan-soft: #67e8f9;
-  --violet: #8b5cf6;
-  --blue: #3b82f6;
-  --amber: #f59e0b;
-  --green: #34d399;
-  --radius: 16px;
-  --radius-sm: 10px;
-  --max: 1200px;
-  --mono: 'JetBrains Mono', 'SFMono-Regular', 'Cascadia Code', 'Fira Code', Consolas, monospace;
-  --sans: 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Segoe UI', system-ui, -apple-system,
-    sans-serif;
+  --bg: #100e0c;
+  --bg-soft: #1a1612;
+  --panel: rgba(26, 22, 18, 0.78);
+  --panel-solid: #1c1814;
+  --border: rgba(232, 163, 23, 0.18);
+  --border-strong: rgba(232, 163, 23, 0.46);
+  --text: #f4eee6;
+  --text-dim: #b8afa3;
+  --text-mute: #7c7368;
+  --signal: #e8a317;
+  --signal-soft: #f3c56b;
+  --brick: #c45c26;
+  --ink: #0c0a08;
+  --cyan: #e8a317;
+  --cyan-soft: #f3c56b;
+  --violet: #c45c26;
+  --blue: #6b7f9a;
+  --amber: #e07a2f;
+  --green: #9cbc4a;
+  --radius: 0;
+  --radius-sm: 0;
+  --max: 1180px;
+  --serif: 'Noto Serif SC', 'Songti SC', 'STSong', 'SimSun', serif;
+  --sans: 'IBM Plex Sans', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', system-ui, sans-serif;
+  --mono: 'IBM Plex Mono', 'SFMono-Regular', 'Cascadia Code', Consolas, monospace;
 }
 
 * {
@@ -30,7 +34,7 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 80px;
+  scroll-padding-top: 84px;
 }
 
 body {
@@ -48,9 +52,9 @@ body::before {
   inset: 0;
   z-index: -2;
   background:
-    radial-gradient(circle at 15% 10%, rgba(34, 211, 238, 0.16), transparent 48%),
-    radial-gradient(circle at 85% 0%, rgba(139, 92, 246, 0.18), transparent 44%),
-    radial-gradient(circle at 50% 100%, rgba(59, 130, 246, 0.12), transparent 58%);
+    radial-gradient(ellipse 80% 50% at 8% -10%, rgba(196, 92, 38, 0.16), transparent 58%),
+    radial-gradient(ellipse 60% 40% at 100% 0%, rgba(232, 163, 23, 0.08), transparent 50%),
+    linear-gradient(180deg, #14110e 0%, var(--bg) 40%, #0c0a08 100%);
 }
 
 body::after {
@@ -59,11 +63,12 @@ body::after {
   inset: 0;
   z-index: -1;
   pointer-events: none;
+  opacity: 0.35;
   background-image:
-    linear-gradient(rgba(110, 231, 249, 0.06) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(110, 231, 249, 0.06) 1px, transparent 1px);
-  background-size: 46px 46px;
-  mask-image: radial-gradient(circle at 50% 30%, #000 0%, transparent 80%);
+    linear-gradient(rgba(232, 163, 23, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(232, 163, 23, 0.05) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: linear-gradient(180deg, #000 0%, transparent 72%);
 }
 
 a {
@@ -76,86 +81,92 @@ button {
   cursor: pointer;
 }
 
+:focus-visible {
+  outline: 1px solid var(--signal);
+  outline-offset: 3px;
+}
+
 img {
   display: block;
   max-width: 100%;
 }
 
 ::selection {
-  background: rgba(34, 211, 238, 0.3);
+  background: rgba(232, 163, 23, 0.28);
   color: #fff;
 }
 
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 8px;
 }
 ::-webkit-scrollbar-track {
   background: var(--bg);
 }
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(var(--cyan), var(--violet));
-  border-radius: 10px;
+  background: var(--brick);
+  border-radius: 0;
 }
 
 .container {
-  width: min(var(--max), 92vw);
+  width: min(var(--max), 90vw);
   margin-inline: auto;
 }
 
 .section {
   position: relative;
-  padding: 96px 0;
+  padding: 88px 0;
 }
 
 .section-head {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  text-align: center;
-  margin-bottom: 56px;
-  gap: 14px;
+  align-items: flex-start;
+  text-align: left;
+  margin-bottom: 48px;
+  gap: 12px;
+  max-width: 640px;
 }
 
 .eyebrow {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   font-family: var(--mono);
   font-size: 12px;
-  letter-spacing: 0.32em;
-  text-transform: uppercase;
-  color: var(--cyan);
-  padding: 6px 14px;
-  border: 1px solid var(--border);
-  border-radius: 999px;
-  background: rgba(34, 211, 238, 0.06);
+  letter-spacing: 0.08em;
+  color: var(--signal);
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
 }
 
 .eyebrow::before {
   content: '';
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--cyan);
-  box-shadow: 0 0 10px var(--cyan);
+  width: 28px;
+  height: 1px;
+  border-radius: 0;
+  background: var(--signal);
+  box-shadow: none;
 }
 
 .section-title {
-  font-size: clamp(28px, 4vw, 44px);
-  font-weight: 800;
-  letter-spacing: -0.01em;
-  line-height: 1.2;
+  font-family: var(--serif);
+  font-size: clamp(30px, 4.4vw, 46px);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  line-height: 1.25;
 }
 
 .section-title .grad {
-  background: linear-gradient(120deg, var(--cyan) 0%, var(--cyan-soft) 40%, var(--violet) 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  color: var(--signal);
+  background: none;
+  -webkit-background-clip: unset;
+  background-clip: unset;
 }
 
 .section-sub {
-  max-width: 640px;
+  max-width: 560px;
   color: var(--text-dim);
   font-size: 15px;
 }
@@ -163,14 +174,14 @@ img {
 .glass {
   background: var(--panel);
   border: 1px solid var(--border);
-  border-radius: var(--radius);
-  backdrop-filter: blur(14px);
+  border-radius: 0;
+  backdrop-filter: blur(8px);
 }
 
 .reveal {
   opacity: 0;
-  transform: translateY(28px);
-  transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  transform: translateY(16px);
+  transition: opacity 0.55s ease, transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .reveal.is-visible {
@@ -184,14 +195,14 @@ img {
     transform: translateY(0);
   }
   50% {
-    transform: translateY(-12px);
+    transform: translateY(-8px);
   }
 }
 
 @keyframes glow-pulse {
   0%,
   100% {
-    opacity: 0.6;
+    opacity: 0.45;
   }
   50% {
     opacity: 1;
@@ -207,9 +218,20 @@ img {
   }
 }
 
+@keyframes blink {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
 @media (max-width: 768px) {
   .section {
-    padding: 72px 0;
+    padding: 64px 0;
   }
 }
 

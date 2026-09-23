@@ -92,11 +92,11 @@ const openByTitle = (groupTitle, link) => {
 
 .group {
   padding: 26px 22px;
-  transition: transform 0.28s ease, border-color 0.28s ease;
+  border-radius: 0;
+  transition: border-color 0.2s ease;
 }
 
 .group:hover {
-  transform: translateY(-6px);
   border-color: var(--border-strong);
 }
 
@@ -113,8 +113,8 @@ const openByTitle = (groupTitle, link) => {
   place-items: center;
   width: 46px;
   height: 46px;
-  border-radius: 12px;
-  background: rgba(255, 255, 255, 0.04);
+  border-radius: 0;
+  background: rgba(232, 163, 23, 0.08);
   border: 1px solid var(--border);
 }
 
@@ -143,40 +143,35 @@ const openByTitle = (groupTitle, link) => {
   width: 100%;
   text-align: left;
   padding: 10px 8px;
-  border-radius: 8px;
+  border-radius: 0;
   border: 0;
   background: none;
   color: var(--text-dim);
   font-size: 13.5px;
-  transition: all 0.2s ease;
+  transition: color 0.2s ease, transform 0.2s ease;
 }
 
 .group li button:hover {
-  color: var(--cyan);
-  background: rgba(34, 211, 238, 0.07);
+  color: var(--signal);
   transform: translateX(4px);
 }
 
 .bullet {
   width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--cyan);
-  box-shadow: 0 0 8px var(--cyan);
+  height: 1px;
+  border-radius: 0;
+  background: var(--signal);
   flex-shrink: 0;
 }
 
 .group.violet .bullet {
-  background: var(--violet);
-  box-shadow: 0 0 8px var(--violet);
+  background: var(--brick);
 }
 .group.blue .bullet {
   background: var(--blue);
-  box-shadow: 0 0 8px var(--blue);
 }
 .group.amber .bullet {
   background: var(--amber);
-  box-shadow: 0 0 8px var(--amber);
 }
 
 .reader-mask {
@@ -186,7 +181,7 @@ const openByTitle = (groupTitle, link) => {
   display: grid;
   place-items: center;
   padding: 24px;
-  background: rgba(10, 16, 30, 0.72);
+  background: rgba(12, 10, 8, 0.78);
   backdrop-filter: blur(8px);
 }
 
@@ -196,14 +191,16 @@ const openByTitle = (groupTitle, link) => {
   max-height: 86vh;
   overflow-y: auto;
   padding: 0;
+  border-radius: 0;
 }
 
 .reader-cover {
   width: 100%;
   height: 240px;
   object-fit: cover;
-  border-radius: var(--radius) var(--radius) 0 0;
+  border-radius: 0;
   opacity: 0.85;
+  filter: saturate(0.7) sepia(0.12);
 }
 
 .reader-body {
@@ -214,7 +211,7 @@ const openByTitle = (groupTitle, link) => {
   font-family: var(--mono);
   font-size: 11px;
   letter-spacing: 0.2em;
-  color: var(--cyan);
+  color: var(--signal);
 }
 
 .reader-body h3 {
@@ -243,17 +240,17 @@ const openByTitle = (groupTitle, link) => {
 .reader-tags span {
   font-size: 11px;
   padding: 3px 9px;
-  border-radius: 6px;
-  background: rgba(34, 211, 238, 0.1);
+  border-radius: 0;
+  background: rgba(232, 163, 23, 0.1);
   border: 1px solid var(--border);
-  color: var(--cyan-soft);
+  color: var(--signal-soft);
 }
 
 .reader-summary {
   font-size: 15px;
   color: var(--text);
   padding-left: 16px;
-  border-left: 3px solid var(--cyan);
+  border-left: 2px solid var(--signal);
   margin-bottom: 20px;
   line-height: 1.8;
 }
@@ -280,15 +277,15 @@ const openByTitle = (groupTitle, link) => {
   display: grid;
   place-items: center;
   padding: 9px;
-  border-radius: 10px;
+  border-radius: 0;
   border: 1px solid rgba(255, 255, 255, 0.18);
-  background: rgba(5, 7, 15, 0.6);
+  background: rgba(12, 10, 8, 0.7);
   color: #fff;
-  transition: all 0.2s ease;
+  transition: background 0.2s ease;
 }
 
 .close:hover {
-  background: rgba(34, 211, 238, 0.2);
+  background: rgba(232, 163, 23, 0.28);
 }
 
 .fade-enter-active,

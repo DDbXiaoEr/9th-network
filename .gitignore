@@ -1,6 +1,13 @@
 node_modules
 dist
 dist-ssr
+dist.tar.gz
+dist.tgz
+dist.zip
+dist.rar
+dist.tar
+dist.*.tar.gz
+dist.*.zip
 *.local
 .DS_Store
 .vscode/*
