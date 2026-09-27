@@ -3,12 +3,14 @@
  * ---------------------------------------------------------------
  * 所有可配置内容优先从站点根目录的 `/config/*.json` 运行时加载，
  * 加载失败或字段缺省时回退到打包进应用的本地默认值：
- *   - site.js      站点通用数据（品牌、导航、页脚、首屏、社团、资源、加入）
+ *   - site.js      站点通用数据（品牌、导航、页脚、首屏、社团、加入）
  *   - services.js  社团公共服务
  *   - activities.js 活动通知
  *   - directions.js 兴趣方向与 CTF 战队
+ *   - articles.js  学习资源分组与文章元数据
  *
  * 部署后修改服务器上 `dist/config/*.json` 即可更新内容，无需重新构建。
+ * 学习资源正文从 `/articles/*.md` 运行时加载，元数据在 articles.json。
  * 使用方式：main.js 中 `await loadConfig()` 后再挂载应用。
  */
 
@@ -22,11 +24,10 @@ import {
   icp,
   joinInfo,
   navLinks,
-  resourceArticles,
-  resourceGroups,
   stats
 } from '../data/site'
 import { activitiesConfig as activitiesDefaults } from './activities'
+import { articlesConfig as articlesDefaults } from './articles'
 import { directionsConfig as directionsDefaults } from './directions'
 import { servicesConfig as servicesDefaults } from './services'
 
@@ -34,7 +35,8 @@ const CONFIG_FILES = {
   site: '/config/site.json',
   services: '/config/services.json',
   activities: '/config/activities.json',
-  directions: '/config/directions.json'
+  directions: '/config/directions.json',
+  articles: '/config/articles.json'
 }
 
 const clone = (value) => JSON.parse(JSON.stringify(value))
@@ -74,13 +76,12 @@ export const config = reactive({
     heroSlides: clone(heroSlides),
     stats: clone(stats),
     aboutTabs: clone(aboutTabs),
-    resourceGroups: clone(resourceGroups),
-    resourceArticles: clone(resourceArticles),
     joinInfo: clone(joinInfo)
   },
   services: clone(servicesDefaults),
   activities: clone(activitiesDefaults),
   directions: clone(directionsDefaults),
+  articles: clone(articlesDefaults),
   loaded: false,
   failed: []
 })
@@ -96,6 +97,7 @@ export async function loadConfig() {
         if (!response.ok) throw new Error(`HTTP ${response.status}`)
         mergeConfig(config[key], await response.json())
       } catch (err) {
+        if (key === 'articles' && (await loadArticlesFromLegacySite())) return
         config.failed.push({ key, url, message: err?.message || String(err) })
         console.warn(`[config] 加载 ${url} 失败，已回退本地默认配置`, err)
       }
@@ -103,6 +105,27 @@ export async function loadConfig() {
   )
   config.loaded = true
   return config
+}
+
+async function loadArticlesFromLegacySite() {
+  try {
+    const response = await fetch(CONFIG_FILES.site, {
+      cache: 'no-cache',
+      headers: { Accept: 'application/json' }
+    })
+    if (!response.ok) return false
+    const site = await response.json()
+    const groups = site.resourceGroups
+    const articles = site.resourceArticles
+    if (!Array.isArray(groups) && !Array.isArray(articles)) return false
+    mergeConfig(config.articles, {
+      groups: groups || [],
+      articles: articles || []
+    })
+    return true
+  } catch {
+    return false
+  }
 }
 
 const toServiceId = (item, index) =>

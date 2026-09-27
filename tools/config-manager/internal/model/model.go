@@ -2,17 +2,15 @@ package model
 
 // Site 对应 public/config/site.json
 type Site struct {
-	Brand            Brand             `json:"brand"`
-	NavLinks         []NavLink         `json:"navLinks"`
-	FooterLinks      []FooterGroup     `json:"footerLinks"`
-	FriendLinks      []FriendLink      `json:"friendLinks,omitempty"`
-	ICP              string            `json:"icp,omitempty"`
-	HeroSlides       []HeroSlide       `json:"heroSlides"`
-	Stats            []Stat            `json:"stats"`
-	AboutTabs        []AboutTab        `json:"aboutTabs"`
-	ResourceGroups   []ResourceGroup   `json:"resourceGroups"`
-	ResourceArticles []ResourceArticle `json:"resourceArticles"`
-	JoinInfo         JoinInfo          `json:"joinInfo"`
+	Brand       Brand         `json:"brand"`
+	NavLinks    []NavLink     `json:"navLinks"`
+	FooterLinks []FooterGroup `json:"footerLinks"`
+	FriendLinks []FriendLink  `json:"friendLinks,omitempty"`
+	ICP         string        `json:"icp,omitempty"`
+	HeroSlides  []HeroSlide   `json:"heroSlides"`
+	Stats       []Stat        `json:"stats"`
+	AboutTabs   []AboutTab    `json:"aboutTabs"`
+	JoinInfo    JoinInfo      `json:"joinInfo"`
 }
 
 type Brand struct {
@@ -75,6 +73,12 @@ type MemberGroup struct {
 	Names []string `json:"names"`
 }
 
+// Articles 对应 public/config/articles.json
+type Articles struct {
+	Groups   []ResourceGroup   `json:"groups"`
+	Articles []ResourceArticle `json:"articles"`
+}
+
 type ResourceGroup struct {
 	Title  string   `json:"title"`
 	Icon   string   `json:"icon"`
@@ -90,7 +94,8 @@ type ResourceArticle struct {
 	Summary  string   `json:"summary"`
 	Cover    string   `json:"cover"`
 	Tags     []string `json:"tags"`
-	Content  []string `json:"content"`
+	File     string   `json:"file"`
+	Markdown string   `json:"-"`
 }
 
 type JoinInfo struct {

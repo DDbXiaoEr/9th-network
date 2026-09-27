@@ -29,11 +29,23 @@ type app struct {
 	store      *store.Store
 	configDir  string
 	targetDir  string
+	sourceWeb  string
 	webRoot    string
 	site       *model.Site
 	services   *model.Services
 	activities *model.Activities
 	directions *model.Directions
+	articles   *model.Articles
+}
+
+func websiteRoot(configDir, fallback string) string {
+	if strings.TrimSpace(fallback) != "" {
+		return fallback
+	}
+	if filepath.Base(configDir) == "config" {
+		return filepath.Dir(configDir)
+	}
+	return configDir
 }
 
 // Run 加载全部配置并启动 TUI。
@@ -46,11 +58,13 @@ func run(opts Options, programOpts ...tea.ProgramOption) error {
 	if target == "" {
 		target = opts.ConfigDir
 	}
+	webRoot := websiteRoot(target, opts.WebRoot)
 	a := &app{
-		ctx:       &Ctx{ConfigDir: opts.ConfigDir, WebRoot: opts.WebRoot},
+		ctx:       &Ctx{ConfigDir: opts.ConfigDir, WebRoot: webRoot},
 		configDir: opts.ConfigDir,
 		targetDir: target,
-		webRoot:   opts.WebRoot,
+		sourceWeb: websiteRoot(opts.ConfigDir, ""),
+		webRoot:   webRoot,
 		store:     store.New(target),
 	}
 	if err := a.loadAll(); err != nil {
@@ -81,10 +95,18 @@ func (a *app) loadAll() error {
 	if err != nil {
 		return fmt.Errorf("加载 directions.json 失败: %w", err)
 	}
+	articles, err := st.LoadArticlesConfig()
+	if err != nil {
+		return fmt.Errorf("加载 articles.json 失败: %w", err)
+	}
+	if err := store.LoadArticles(a.sourceWeb, articles.Articles); err != nil {
+		return fmt.Errorf("加载文章失败: %w", err)
+	}
 	a.site = site
 	a.services = services
 	a.activities = activities
 	a.directions = directions
+	a.articles = articles
 	return nil
 }
 
@@ -129,10 +151,19 @@ func (a *app) switchDir(webRoot string) error {
 	if v, err := st.LoadDirections(); err == nil {
 		directions = *v
 	}
+	articles := *a.articles
+	if v, err := st.LoadArticlesConfig(); err == nil {
+		articles = *v
+	}
+
+	if err := store.LoadArticles(abs, articles.Articles); err != nil {
+		return fmt.Errorf("加载文章失败: %w", err)
+	}
 
 	a.store = st
 	a.configDir = cfgDir
 	a.targetDir = cfgDir
+	a.sourceWeb = abs
 	a.webRoot = abs
 	a.ctx.ConfigDir = cfgDir
 	a.ctx.WebRoot = abs
@@ -140,6 +171,7 @@ func (a *app) switchDir(webRoot string) error {
 	*a.services = services
 	*a.activities = activities
 	*a.directions = directions
+	*a.articles = articles
 
 	_ = settings.Save(settings.Settings{WebRoot: abs})
 	return nil
@@ -150,20 +182,20 @@ func (a *app) fileMenu() screen {
 	a.ctx.SaveFn = nil
 	a.ctx.ReloadFn = nil
 
-	target := a.targetDir
 	return newMenuScreen(a.ctx, "选择配置文件", []menuItem{
-		{label: "site.json", desc: "品牌 / 导航 / 页脚 / 首屏 / 社团 / 资源 / 加入", open: a.openSite},
+		{label: "site.json", desc: "品牌 / 导航 / 页脚 / 首屏 / 社团 / 加入", open: a.openSite},
 		{label: "services.json", desc: "社团公共服务", open: a.openServices},
 		{label: "activities.json", desc: "活动通知与回顾", open: a.openActivities},
 		{label: "directions.json", desc: "兴趣方向 / CTF 战队", open: a.openDirections},
-		{label: "⚙ 设置网站根目录", desc: "当前写入 " + target, open: a.openSettings},
+		{label: "articles.json", desc: "学习资源分组与文章", open: a.openArticles},
+		{label: "⚙ 设置网站根目录", desc: "当前写入 " + a.webRoot, open: a.openSettings},
 	})
 }
 
 func (a *app) openSettings() screen {
 	return newPathScreen(a.ctx,
 		"设置网站根目录",
-		"配置将写入 <网站根目录>/config/*.json；目录不存在会报错，config 子目录会自动创建。",
+		"配置写入 <网站根目录>/config/*.json，文章写入 <网站根目录>/articles/*.md；目录不存在会报错，子目录会自动创建。",
 		a.webRoot,
 		a.switchDir,
 		a.fileMenu,
@@ -224,6 +256,30 @@ func (a *app) openDirections() screen {
 		return nil
 	}
 	return directionsRoot(a.ctx, a.directions)
+}
+
+func (a *app) openArticles() screen {
+	a.ctx.File = "articles.json"
+	a.ctx.SaveFn = func() error {
+		store.NormalizeArticleFiles(a.articles.Articles)
+		store.SyncResourceGroupLinks(a.articles.Groups, a.articles.Articles)
+		if err := store.SaveArticles(a.webRoot, a.articles.Articles); err != nil {
+			return err
+		}
+		return a.store.SaveArticlesConfig(a.articles)
+	}
+	a.ctx.ReloadFn = func() error {
+		v, err := a.store.LoadArticlesConfig()
+		if err != nil {
+			return err
+		}
+		if err := store.LoadArticles(a.webRoot, v.Articles); err != nil {
+			return err
+		}
+		*a.articles = *v
+		return nil
+	}
+	return articlesRoot(a.ctx, a.articles)
 }
 
 // objectList 是一个通用的「结构体切片」列表界面：支持进入编辑、新增、删除与上下移。

@@ -1,22 +1,80 @@
 <script setup>
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import { config } from '../config'
+import { renderMarkdown } from '../lib/markdown'
 import BaseIcon from './BaseIcon.vue'
 
 const selected = ref(null)
-const resourceArticles = config.site.resourceArticles
-const resourceGroups = config.site.resourceGroups
+const markdown = ref('')
+const markdownError = ref('')
+const resourceArticles = config.articles.articles
+const resourceGroups = config.articles.groups
+const cache = new Map()
+
+const html = computed(() => renderMarkdown(markdown.value))
+
+const displayGroups = computed(() =>
+  resourceGroups.map((group) => {
+    const titles = [...(group.links || [])]
+    resourceArticles.forEach((article) => {
+      if (article.category === group.title && article.title && !titles.includes(article.title)) {
+        titles.push(article.title)
+      }
+    })
+    return { ...group, links: titles }
+  })
+)
+
+const articleFile = (article) => {
+  const file = article?.file || (article?.id ? `/articles/${article.id}.md` : '')
+  if (!file) return ''
+  return file.startsWith('/') ? file : `/${file}`
+}
+
+const openArticle = async (article) => {
+  if (!article) return
+  selected.value = article
+  markdownError.value = ''
+  const file = articleFile(article)
+  if (!file) {
+    markdown.value = ''
+    markdownError.value = '未配置文章文件'
+    return
+  }
+  if (cache.has(file)) {
+    markdown.value = cache.get(file)
+    return
+  }
+  markdown.value = ''
+  try {
+    const response = await fetch(file, { cache: 'no-cache' })
+    if (!response.ok) throw new Error(`HTTP ${response.status}`)
+    const text = await response.text()
+    cache.set(file, text)
+    if (selected.value === article) markdown.value = text
+  } catch (err) {
+    if (selected.value === article) {
+      markdownError.value = '文章加载失败，请稍后重试。'
+      console.warn(`[resources] 加载 ${file} 失败`, err)
+    }
+  }
+}
 
 const openByCategory = (category) => {
-  const article = resourceArticles.find((a) => a.category === category)
-  if (article) selected.value = article
+  openArticle(resourceArticles.find((a) => a.category === category))
 }
 
 const openByTitle = (groupTitle, link) => {
-  const article =
+  openArticle(
     resourceArticles.find((a) => a.title === link) ||
-    resourceArticles.find((a) => a.category === groupTitle)
-  if (article) selected.value = article
+      resourceArticles.find((a) => a.category === groupTitle)
+  )
+}
+
+const closeReader = () => {
+  selected.value = null
+  markdown.value = ''
+  markdownError.value = ''
 }
 </script>
 
@@ -33,7 +91,7 @@ const openByTitle = (groupTitle, link) => {
 
       <div class="group-grid">
         <div
-          v-for="(group, i) in resourceGroups"
+          v-for="(group, i) in displayGroups"
           :key="group.title"
           class="group glass"
           :class="group.accent"
@@ -58,9 +116,9 @@ const openByTitle = (groupTitle, link) => {
     </div>
 
     <transition name="fade">
-      <div v-if="selected" class="reader-mask" @click.self="selected = null">
+      <div v-if="selected" class="reader-mask" @click.self="closeReader">
         <article class="reader glass">
-          <button class="close" @click="selected = null" aria-label="关闭">
+          <button class="close" @click="closeReader" aria-label="关闭">
             <BaseIcon name="close" :size="20" />
           </button>
           <img class="reader-cover" :src="selected.cover" :alt="selected.title" />
@@ -74,8 +132,9 @@ const openByTitle = (groupTitle, link) => {
               </span>
             </div>
             <p class="reader-summary">{{ selected.summary }}</p>
-            <p v-for="(para, i) in selected.content" :key="i" class="reader-para">{{ para }}</p>
-            <p class="reader-note">更多完整内容，欢迎加入社团一起学习交流。</p>
+            <p v-if="markdownError" class="reader-error">{{ markdownError }}</p>
+            <div v-else-if="html" class="reader-md" v-html="html" />
+            <p class="reader-note">想接触了解更多内容，欢迎加入社团一起学习交流。</p>
           </div>
         </article>
       </div>
@@ -255,11 +314,113 @@ const openByTitle = (groupTitle, link) => {
   line-height: 1.8;
 }
 
-.reader-para {
+.reader-error {
+  color: var(--brick);
+  font-size: 14px;
+  margin-bottom: 16px;
+}
+
+.reader-md {
   color: var(--text-dim);
   font-size: 14.5px;
   line-height: 1.9;
+}
+
+.reader-md :deep(h1),
+.reader-md :deep(h2),
+.reader-md :deep(h3),
+.reader-md :deep(h4) {
+  color: var(--text);
+  font-weight: 600;
+  margin: 22px 0 10px;
+  line-height: 1.4;
+}
+
+.reader-md :deep(h1) { font-size: 22px; }
+.reader-md :deep(h2) { font-size: 18px; }
+.reader-md :deep(h3) { font-size: 16px; }
+
+.reader-md :deep(p) {
   margin-bottom: 14px;
+}
+
+.reader-md :deep(a) {
+  color: var(--signal);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.reader-md :deep(ul),
+.reader-md :deep(ol) {
+  padding-left: 22px;
+  margin: 0 0 14px;
+}
+
+.reader-md :deep(li) {
+  margin-bottom: 6px;
+}
+
+.reader-md :deep(blockquote) {
+  margin: 0 0 14px;
+  padding: 4px 0 4px 14px;
+  border-left: 2px solid var(--signal);
+  color: var(--text);
+}
+
+.reader-md :deep(code) {
+  font-family: var(--mono);
+  font-size: 13px;
+  padding: 1px 6px;
+  background: rgba(232, 163, 23, 0.1);
+  border: 1px solid var(--border);
+  color: var(--signal-soft);
+}
+
+.reader-md :deep(pre) {
+  margin: 0 0 16px;
+  padding: 14px 16px;
+  overflow-x: auto;
+  background: rgba(12, 10, 8, 0.55);
+  border: 1px solid var(--border);
+}
+
+.reader-md :deep(pre code) {
+  padding: 0;
+  background: none;
+  border: 0;
+  color: var(--text-dim);
+}
+
+.reader-md :deep(img) {
+  display: block;
+  max-width: 100%;
+  margin: 12px 0 16px;
+  border: 1px solid var(--border);
+}
+
+.reader-md :deep(hr) {
+  border: 0;
+  border-top: 1px solid var(--border);
+  margin: 20px 0;
+}
+
+.reader-md :deep(table) {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0 0 16px;
+  font-size: 13.5px;
+}
+
+.reader-md :deep(th),
+.reader-md :deep(td) {
+  border: 1px solid var(--border);
+  padding: 8px 10px;
+  text-align: left;
+}
+
+.reader-md :deep(th) {
+  color: var(--text);
+  background: rgba(232, 163, 23, 0.08);
 }
 
 .reader-note {

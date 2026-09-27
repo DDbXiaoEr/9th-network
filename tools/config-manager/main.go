@@ -10,7 +10,7 @@ import (
 	"the9thnet/config-manager/internal/tui"
 )
 
-var configFiles = []string{"site.json", "services.json", "activities.json", "directions.json"}
+var configFiles = []string{"site.json", "services.json", "activities.json", "directions.json", "articles.json"}
 
 func main() {
 	dir := flag.String("dir", "", "配置文件目录（直接读写该目录，优先级最高）")

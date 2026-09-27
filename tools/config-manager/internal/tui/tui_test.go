@@ -88,7 +88,7 @@ func TestChoiceRowCycle(t *testing.T) {
 func TestRunWithRealConfig(t *testing.T) {
 	srcDir := "../../../../public/config"
 	dst := t.TempDir()
-	for _, name := range []string{"site.json", "services.json", "activities.json", "directions.json"} {
+	for _, name := range []string{"site.json", "services.json", "activities.json", "directions.json", "articles.json"} {
 		b, err := os.ReadFile(filepath.Join(srcDir, name))
 		if err != nil {
 			t.Fatalf("读取 %s 失败: %v", name, err)

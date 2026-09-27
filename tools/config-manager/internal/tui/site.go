@@ -42,16 +42,6 @@ func siteRoot(ctx *Ctx, s *model.Site) screen {
 				func(_ int, v *model.AboutTab) (string, string) { return v.Label, v.Key },
 				aboutTabForm, func() model.AboutTab { return model.AboutTab{} })
 		}),
-		openRow("资源分组", func() string { return itemCount(len(s.ResourceGroups)) }, func() screen {
-			return objectList(ctx, "资源分组", "", &s.ResourceGroups,
-				func(_ int, v *model.ResourceGroup) (string, string) { return v.Title, v.Accent },
-				resourceGroupForm, func() model.ResourceGroup { return model.ResourceGroup{} })
-		}),
-		openRow("资源文章", func() string { return itemCount(len(s.ResourceArticles)) }, func() screen {
-			return objectList(ctx, "资源文章", "", &s.ResourceArticles,
-				func(_ int, v *model.ResourceArticle) (string, string) { return v.Title, v.Category },
-				resourceArticleForm, func() model.ResourceArticle { return model.ResourceArticle{} })
-		}),
 		openRow("加入信息", func() string { return s.JoinInfo.Title + s.JoinInfo.Highlight }, func() screen {
 			return joinInfoForm(ctx, &s.JoinInfo)
 		}),
@@ -148,34 +138,6 @@ func memberGroupForm(ctx *Ctx, v *model.MemberGroup) screen {
 		rowText("角色", &v.Role),
 		openRow("成员", func() string { return itemCount(len(v.Names)) }, func() screen {
 			return newStringList(ctx, "成员姓名", &v.Names)
-		}),
-	})
-}
-
-func resourceGroupForm(ctx *Ctx, v *model.ResourceGroup) screen {
-	return newFormScreen(ctx, "资源分组", []formRow{
-		rowText("标题", &v.Title),
-		rowText("图标", &v.Icon),
-		rowText("主题色 accent", &v.Accent),
-		openRow("链接", func() string { return itemCount(len(v.Links)) }, func() screen {
-			return newStringList(ctx, "链接", &v.Links)
-		}),
-	})
-}
-
-func resourceArticleForm(ctx *Ctx, v *model.ResourceArticle) screen {
-	return newFormScreen(ctx, "资源文章", []formRow{
-		rowText("id", &v.ID),
-		rowText("分类", &v.Category),
-		rowText("标题", &v.Title),
-		rowText("作者", &v.Author),
-		rowLong("摘要", &v.Summary),
-		rowText("封面", &v.Cover),
-		openRow("标签", func() string { return itemCount(len(v.Tags)) }, func() screen {
-			return newStringList(ctx, "标签", &v.Tags)
-		}),
-		openRow("正文", func() string { return itemCount(len(v.Content)) }, func() screen {
-			return newStringList(ctx, "正文段落", &v.Content)
 		}),
 	})
 }
