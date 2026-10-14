@@ -105,6 +105,8 @@ func memberForm(ctx *Ctx, v *model.Member) screen {
 		rowText("ID", &v.Handle),
 		rowText("角色", &v.Role),
 		rowText("方向", &v.Direction),
+		rowText("GitHub", &v.GitHub),
+		rowText("个人网站", &v.Website),
 	})
 }
 

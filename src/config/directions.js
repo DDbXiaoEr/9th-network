@@ -10,7 +10,7 @@
  *   ctf        - CTF 战队板块（可整体关闭：enabled: false）
  *       bestRank   历史最好成绩展示
  *       team       战队信息（键值对展示）
- *       members    队员列表
+ *       members    队员列表（name / handle / role / direction / github? / website?）
  *       competitions 比赛记录与成绩
  *
  * 说明：战队名称、队员与比赛记录来自社团成员的真实参赛经历（CTFTime）。
@@ -88,7 +88,14 @@ export const directionsConfig = {
     },
 
     members: [
-      { name: '王兆泉', handle: '@V0ker', role: '队长', direction: '社工 · Reverse · Crypto' }
+      {
+        name: '王兆泉',
+        handle: '@V0ker',
+        role: '队长',
+        direction: '社工 · Reverse · Crypto',
+        github: '',
+        website: ''
+      }
     ],
 
     competitions: [

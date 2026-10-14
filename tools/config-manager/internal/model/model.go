@@ -252,6 +252,8 @@ type Member struct {
 	Handle    string `json:"handle"`
 	Role      string `json:"role"`
 	Direction string `json:"direction"`
+	GitHub    string `json:"github,omitempty"`
+	Website   string `json:"website,omitempty"`
 }
 
 type Competition struct {

@@ -64,7 +64,14 @@
       ]
     },
     "members": [
-      { "name": "王兆泉", "handle": "@V0ker", "role": "队长", "direction": "社工 · Reverse · Crypto" }
+      {
+        "name": "王兆泉",
+        "handle": "@V0ker",
+        "role": "队长",
+        "direction": "社工 · Reverse · Crypto",
+        "github": "",
+        "website": ""
+      }
     ],
     "competitions": [
       {

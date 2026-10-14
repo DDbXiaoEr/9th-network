@@ -7,6 +7,12 @@ import BaseIcon from '../components/BaseIcon.vue'
 const router = useRouter()
 const { section, directions, ctf } = config.directions
 
+const href = (value, prefix) => {
+  if (!value) return ''
+  if (/^https?:\/\//i.test(value)) return value
+  return `${prefix}${value.replace(/^@/, '')}`
+}
+
 const goHomeSection = async (id) => {
   await router.push('/')
   await nextTick()
@@ -137,6 +143,30 @@ const goHomeSection = async (id) => {
                   <div class="member-line sub">
                     <span class="role">{{ m.role }}</span>
                     <span class="direction">{{ m.direction }}</span>
+                  </div>
+                  <div v-if="m.github || m.website" class="member-links">
+                    <a
+                      v-if="m.github"
+                      class="member-link"
+                      :href="href(m.github, 'https://github.com/')"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      :aria-label="`${m.name} 的 GitHub`"
+                      title="GitHub"
+                    >
+                      <BaseIcon name="github" :size="14" />
+                    </a>
+                    <a
+                      v-if="m.website"
+                      class="member-link"
+                      :href="href(m.website, 'https://')"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      :aria-label="`${m.name} 的个人网站`"
+                      title="个人网站"
+                    >
+                      <BaseIcon name="globe" :size="14" />
+                    </a>
                   </div>
                 </div>
               </div>
@@ -617,6 +647,24 @@ const goHomeSection = async (id) => {
 
 .direction {
   color: var(--text-dim);
+}
+
+.member-links {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 2px;
+}
+
+.member-link {
+  display: grid;
+  place-items: center;
+  color: var(--text-mute);
+  transition: color 0.2s ease;
+}
+
+.member-link:hover {
+  color: var(--signal);
 }
 
 .records-head h3 {
